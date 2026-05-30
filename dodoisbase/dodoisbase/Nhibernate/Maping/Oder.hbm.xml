@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="dodoisbase"
+                   namespace="dodoisbase.Nhibernate.Entites">
+
+	<class name="Oder" table="[Заказы]">
+		<id name="ID_Заказа" column="[ID_Заказа]">
+			<generator class="native" />
+		</id>
+		
+		<property name="ID_Клиента" column="[ID_Клиента]" />
+
+		<property name="Дата_заказа" column="[Дата_заказа]" />
+		<property name="Сумма" column="[Сумма]" />
+		<property name="Статус" column="[Статус]" />
+		<property name="Адресс_доставки" column="[Адресс_доставки]" />
+		<!--
+		<bag name="Oders" table ="[Доставка]">
+			 <key column="[ID_Заказа]"/>
+			<many-to-one class="Personal" column="[ID_Сотрудника]"/>
+		</bag>	
+-->
+	</class>
+</hibernate-mapping>
