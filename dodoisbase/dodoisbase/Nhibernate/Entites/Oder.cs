@@ -17,5 +17,6 @@ namespace dodoisbase.Nhibernate.Entites
 
         public virtual Personal Personal { get; set; }
         public virtual IList<Personal> PersonalList { get; set; }
+        public virtual IList<Tovar> TovarList { get; set; }
     }
 }

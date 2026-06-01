@@ -46,6 +46,8 @@ namespace dodoisbase {
         
         private ТоварDataTable tableТовар;
         
+        private SostTovarIngrDataTable tableSostTovarIngr;
+        
         private ИнгредиентыDataTable tableИнгредиенты;
         
         private global::System.Data.DataRelation relationЗаказДоставка;
@@ -68,7 +70,9 @@ namespace dodoisbase {
         
         private global::System.Data.DataRelation relationТоварСостав_заказа;
         
-        private global::System.Data.DataRelation relationИнгредиентыТовар;
+        private global::System.Data.DataRelation relationТоварSostTovarIngr;
+        
+        private global::System.Data.DataRelation relationИнгредиентыSostTovarIngr;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -130,6 +134,9 @@ namespace dodoisbase {
                 }
                 if ((ds.Tables["Товар"] != null)) {
                     base.Tables.Add(new ТоварDataTable(ds.Tables["Товар"]));
+                }
+                if ((ds.Tables["SostTovarIngr"] != null)) {
+                    base.Tables.Add(new SostTovarIngrDataTable(ds.Tables["SostTovarIngr"]));
                 }
                 if ((ds.Tables["Ингредиенты"] != null)) {
                     base.Tables.Add(new ИнгредиентыDataTable(ds.Tables["Ингредиенты"]));
@@ -266,6 +273,16 @@ namespace dodoisbase {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SostTovarIngrDataTable SostTovarIngr {
+            get {
+                return this.tableSostTovarIngr;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public ИнгредиентыDataTable Ингредиенты {
             get {
                 return this.tableИнгредиенты;
@@ -372,6 +389,9 @@ namespace dodoisbase {
                 if ((ds.Tables["Товар"] != null)) {
                     base.Tables.Add(new ТоварDataTable(ds.Tables["Товар"]));
                 }
+                if ((ds.Tables["SostTovarIngr"] != null)) {
+                    base.Tables.Add(new SostTovarIngrDataTable(ds.Tables["SostTovarIngr"]));
+                }
                 if ((ds.Tables["Ингредиенты"] != null)) {
                     base.Tables.Add(new ИнгредиентыDataTable(ds.Tables["Ингредиенты"]));
                 }
@@ -474,6 +494,12 @@ namespace dodoisbase {
                     this.tableТовар.InitVars();
                 }
             }
+            this.tableSostTovarIngr = ((SostTovarIngrDataTable)(base.Tables["SostTovarIngr"]));
+            if ((initTable == true)) {
+                if ((this.tableSostTovarIngr != null)) {
+                    this.tableSostTovarIngr.InitVars();
+                }
+            }
             this.tableИнгредиенты = ((ИнгредиентыDataTable)(base.Tables["Ингредиенты"]));
             if ((initTable == true)) {
                 if ((this.tableИнгредиенты != null)) {
@@ -490,7 +516,8 @@ namespace dodoisbase {
             this.relationСотрудникиСмены = this.Relations["СотрудникиСмены"];
             this.relationЗаказСостав_заказа = this.Relations["ЗаказСостав_заказа"];
             this.relationТоварСостав_заказа = this.Relations["ТоварСостав_заказа"];
-            this.relationИнгредиентыТовар = this.Relations["ИнгредиентыТовар"];
+            this.relationТоварSostTovarIngr = this.Relations["ТоварSostTovarIngr"];
+            this.relationИнгредиентыSostTovarIngr = this.Relations["ИнгредиентыSostTovarIngr"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -523,6 +550,8 @@ namespace dodoisbase {
             base.Tables.Add(this.tableСостав_заказа);
             this.tableТовар = new ТоварDataTable();
             base.Tables.Add(this.tableТовар);
+            this.tableSostTovarIngr = new SostTovarIngrDataTable();
+            base.Tables.Add(this.tableSostTovarIngr);
             this.tableИнгредиенты = new ИнгредиентыDataTable();
             base.Tables.Add(this.tableИнгредиенты);
             this.relationЗаказДоставка = new global::System.Data.DataRelation("ЗаказДоставка", new global::System.Data.DataColumn[] {
@@ -565,10 +594,14 @@ namespace dodoisbase {
                         this.tableТовар.ID_ТовараColumn}, new global::System.Data.DataColumn[] {
                         this.tableСостав_заказа.ID_ТовараColumn}, false);
             this.Relations.Add(this.relationТоварСостав_заказа);
-            this.relationИнгредиентыТовар = new global::System.Data.DataRelation("ИнгредиентыТовар", new global::System.Data.DataColumn[] {
+            this.relationТоварSostTovarIngr = new global::System.Data.DataRelation("ТоварSostTovarIngr", new global::System.Data.DataColumn[] {
+                        this.tableТовар.ID_ТовараColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSostTovarIngr.ID_ТовараColumn}, false);
+            this.Relations.Add(this.relationТоварSostTovarIngr);
+            this.relationИнгредиентыSostTovarIngr = new global::System.Data.DataRelation("ИнгредиентыSostTovarIngr", new global::System.Data.DataColumn[] {
                         this.tableИнгредиенты.ID_ИнгредиентаColumn}, new global::System.Data.DataColumn[] {
-                        this.tableТовар.ID_ИнгредиентаColumn}, false);
-            this.Relations.Add(this.relationИнгредиентыТовар);
+                        this.tableSostTovarIngr.ID_ИнгредиентаColumn}, false);
+            this.Relations.Add(this.relationИнгредиентыSostTovarIngr);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -634,6 +667,12 @@ namespace dodoisbase {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private bool ShouldSerializeТовар() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private bool ShouldSerializeSostTovarIngr() {
             return false;
         }
         
@@ -730,6 +769,9 @@ namespace dodoisbase {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         public delegate void ТоварRowChangeEventHandler(object sender, ТоварRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public delegate void SostTovarIngrRowChangeEventHandler(object sender, SostTovarIngrRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         public delegate void ИнгредиентыRowChangeEventHandler(object sender, ИнгредиентыRowChangeEvent e);
@@ -3949,8 +3991,6 @@ namespace dodoisbase {
             
             private global::System.Data.DataColumn columnID_Товара;
             
-            private global::System.Data.DataColumn columnID_Ингредиента;
-            
             private global::System.Data.DataColumn columnНазвание;
             
             private global::System.Data.DataColumn columnЦена;
@@ -3997,14 +4037,6 @@ namespace dodoisbase {
             public global::System.Data.DataColumn ID_ТовараColumn {
                 get {
                     return this.columnID_Товара;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public global::System.Data.DataColumn ID_ИнгредиентаColumn {
-                get {
-                    return this.columnID_Ингредиента;
                 }
             }
             
@@ -4077,18 +4109,14 @@ namespace dodoisbase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public ТоварRow AddТоварRow(ИнгредиентыRow parentИнгредиентыRowByИнгредиентыТовар, string Название, int Цена, string Категория, int Калорийность) {
+            public ТоварRow AddТоварRow(string Название, int Цена, string Категория, int Калорийность) {
                 ТоварRow rowТоварRow = ((ТоварRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
                         null,
                         Название,
                         Цена,
                         Категория,
                         Калорийность};
-                if ((parentИнгредиентыRowByИнгредиентыТовар != null)) {
-                    columnValuesArray[1] = parentИнгредиентыRowByИнгредиентыТовар[0];
-                }
                 rowТоварRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowТоварRow);
                 return rowТоварRow;
@@ -4119,7 +4147,6 @@ namespace dodoisbase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             internal void InitVars() {
                 this.columnID_Товара = base.Columns["ID_Товара"];
-                this.columnID_Ингредиента = base.Columns["ID_Ингредиента"];
                 this.columnНазвание = base.Columns["Название"];
                 this.columnЦена = base.Columns["Цена"];
                 this.columnКатегория = base.Columns["Категория"];
@@ -4131,8 +4158,6 @@ namespace dodoisbase {
             private void InitClass() {
                 this.columnID_Товара = new global::System.Data.DataColumn("ID_Товара", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID_Товара);
-                this.columnID_Ингредиента = new global::System.Data.DataColumn("ID_Ингредиента", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID_Ингредиента);
                 this.columnНазвание = new global::System.Data.DataColumn("Название", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnНазвание);
                 this.columnЦена = new global::System.Data.DataColumn("Цена", typeof(int), null, global::System.Data.MappingType.Element);
@@ -4236,6 +4261,301 @@ namespace dodoisbase {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "ТоварDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SostTovarIngrDataTable : global::System.Data.TypedTableBase<SostTovarIngrRow> {
+            
+            private global::System.Data.DataColumn columnКод;
+            
+            private global::System.Data.DataColumn columnID_Товара;
+            
+            private global::System.Data.DataColumn columnID_Ингредиента;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrDataTable() {
+                this.TableName = "SostTovarIngr";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal SostTovarIngrDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected SostTovarIngrDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn КодColumn {
+                get {
+                    return this.columnКод;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn ID_ТовараColumn {
+                get {
+                    return this.columnID_Товара;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataColumn ID_ИнгредиентаColumn {
+                get {
+                    return this.columnID_Ингредиента;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow this[int index] {
+                get {
+                    return ((SostTovarIngrRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event SostTovarIngrRowChangeEventHandler SostTovarIngrRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event SostTovarIngrRowChangeEventHandler SostTovarIngrRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event SostTovarIngrRowChangeEventHandler SostTovarIngrRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public event SostTovarIngrRowChangeEventHandler SostTovarIngrRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void AddSostTovarIngrRow(SostTovarIngrRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow AddSostTovarIngrRow(ТоварRow parentТоварRowByТоварSostTovarIngr, ИнгредиентыRow parentИнгредиентыRowByИнгредиентыSostTovarIngr) {
+                SostTovarIngrRow rowSostTovarIngrRow = ((SostTovarIngrRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null};
+                if ((parentТоварRowByТоварSostTovarIngr != null)) {
+                    columnValuesArray[1] = parentТоварRowByТоварSostTovarIngr[0];
+                }
+                if ((parentИнгредиентыRowByИнгредиентыSostTovarIngr != null)) {
+                    columnValuesArray[2] = parentИнгредиентыRowByИнгредиентыSostTovarIngr[0];
+                }
+                rowSostTovarIngrRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSostTovarIngrRow);
+                return rowSostTovarIngrRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow FindByКод(int Код) {
+                return ((SostTovarIngrRow)(this.Rows.Find(new object[] {
+                            Код})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                SostTovarIngrDataTable cln = ((SostTovarIngrDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SostTovarIngrDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal void InitVars() {
+                this.columnКод = base.Columns["Код"];
+                this.columnID_Товара = base.Columns["ID_Товара"];
+                this.columnID_Ингредиента = base.Columns["ID_Ингредиента"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            private void InitClass() {
+                this.columnКод = new global::System.Data.DataColumn("Код", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnКод);
+                this.columnID_Товара = new global::System.Data.DataColumn("ID_Товара", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID_Товара);
+                this.columnID_Ингредиента = new global::System.Data.DataColumn("ID_Ингредиента", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID_Ингредиента);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnКод}, true));
+                this.columnКод.AutoIncrement = true;
+                this.columnКод.AutoIncrementSeed = -1;
+                this.columnКод.AutoIncrementStep = -1;
+                this.columnКод.AllowDBNull = false;
+                this.columnКод.Unique = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow NewSostTovarIngrRow() {
+                return ((SostTovarIngrRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SostTovarIngrRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(SostTovarIngrRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SostTovarIngrRowChanged != null)) {
+                    this.SostTovarIngrRowChanged(this, new SostTovarIngrRowChangeEvent(((SostTovarIngrRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SostTovarIngrRowChanging != null)) {
+                    this.SostTovarIngrRowChanging(this, new SostTovarIngrRowChangeEvent(((SostTovarIngrRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SostTovarIngrRowDeleted != null)) {
+                    this.SostTovarIngrRowDeleted(this, new SostTovarIngrRowChangeEvent(((SostTovarIngrRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SostTovarIngrRowDeleting != null)) {
+                    this.SostTovarIngrRowDeleting(this, new SostTovarIngrRowChangeEvent(((SostTovarIngrRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void RemoveSostTovarIngrRow(SostTovarIngrRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dodoDS ds = new dodoDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SostTovarIngrDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -6184,22 +6504,6 @@ namespace dodoisbase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public int ID_Ингредиента {
-                get {
-                    try {
-                        return ((int)(this[this.tableТовар.ID_ИнгредиентаColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ID_Ингредиента\' в таблице \'Товар\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableТовар.ID_ИнгредиентаColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public string Название {
                 get {
                     try {
@@ -6264,29 +6568,6 @@ namespace dodoisbase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public ИнгредиентыRow ИнгредиентыRow {
-                get {
-                    return ((ИнгредиентыRow)(this.GetParentRow(this.Table.ParentRelations["ИнгредиентыТовар"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ИнгредиентыТовар"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public bool IsID_ИнгредиентаNull() {
-                return this.IsNull(this.tableТовар.ID_ИнгредиентаColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public void SetID_ИнгредиентаNull() {
-                this[this.tableТовар.ID_ИнгредиентаColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public bool IsНазваниеNull() {
                 return this.IsNull(this.tableТовар.НазваниеColumn);
             }
@@ -6342,6 +6623,121 @@ namespace dodoisbase {
                 else {
                     return ((Состав_заказаRow[])(base.GetChildRows(this.Table.ChildRelations["ТоварСостав_заказа"])));
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow[] GetSostTovarIngrRows() {
+                if ((this.Table.ChildRelations["ТоварSostTovarIngr"] == null)) {
+                    return new SostTovarIngrRow[0];
+                }
+                else {
+                    return ((SostTovarIngrRow[])(base.GetChildRows(this.Table.ChildRelations["ТоварSostTovarIngr"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class SostTovarIngrRow : global::System.Data.DataRow {
+            
+            private SostTovarIngrDataTable tableSostTovarIngr;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            internal SostTovarIngrRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSostTovarIngr = ((SostTovarIngrDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public int Код {
+                get {
+                    return ((int)(this[this.tableSostTovarIngr.КодColumn]));
+                }
+                set {
+                    this[this.tableSostTovarIngr.КодColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public int ID_Товара {
+                get {
+                    try {
+                        return ((int)(this[this.tableSostTovarIngr.ID_ТовараColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ID_Товара\' в таблице \'SostTovarIngr\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSostTovarIngr.ID_ТовараColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public int ID_Ингредиента {
+                get {
+                    try {
+                        return ((int)(this[this.tableSostTovarIngr.ID_ИнгредиентаColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ID_Ингредиента\' в таблице \'SostTovarIngr\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSostTovarIngr.ID_ИнгредиентаColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public ТоварRow ТоварRow {
+                get {
+                    return ((ТоварRow)(this.GetParentRow(this.Table.ParentRelations["ТоварSostTovarIngr"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ТоварSostTovarIngr"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public ИнгредиентыRow ИнгредиентыRow {
+                get {
+                    return ((ИнгредиентыRow)(this.GetParentRow(this.Table.ParentRelations["ИнгредиентыSostTovarIngr"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ИнгредиентыSostTovarIngr"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public bool IsID_ТовараNull() {
+                return this.IsNull(this.tableSostTovarIngr.ID_ТовараColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void SetID_ТовараNull() {
+                this[this.tableSostTovarIngr.ID_ТовараColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public bool IsID_ИнгредиентаNull() {
+                return this.IsNull(this.tableSostTovarIngr.ID_ИнгредиентаColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public void SetID_ИнгредиентаNull() {
+                this[this.tableSostTovarIngr.ID_ИнгредиентаColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6485,12 +6881,12 @@ namespace dodoisbase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-            public ТоварRow[] GetТоварRows() {
-                if ((this.Table.ChildRelations["ИнгредиентыТовар"] == null)) {
-                    return new ТоварRow[0];
+            public SostTovarIngrRow[] GetSostTovarIngrRows() {
+                if ((this.Table.ChildRelations["ИнгредиентыSostTovarIngr"] == null)) {
+                    return new SostTovarIngrRow[0];
                 }
                 else {
-                    return ((ТоварRow[])(base.GetChildRows(this.Table.ChildRelations["ИнгредиентыТовар"])));
+                    return ((SostTovarIngrRow[])(base.GetChildRows(this.Table.ChildRelations["ИнгредиентыSostTovarIngr"])));
                 }
             }
         }
@@ -6855,6 +7251,40 @@ namespace dodoisbase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
             public ТоварRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public class SostTovarIngrRowChangeEvent : global::System.EventArgs {
+            
+            private SostTovarIngrRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRowChangeEvent(SostTovarIngrRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+            public SostTovarIngrRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -11434,7 +11864,6 @@ namespace dodoisbase.dodoDSTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Товар";
             tableMapping.ColumnMappings.Add("ID_Товара", "ID_Товара");
-            tableMapping.ColumnMappings.Add("ID_Ингредиента", "ID_Ингредиента");
             tableMapping.ColumnMappings.Add("Название", "Название");
             tableMapping.ColumnMappings.Add("Цена", "Цена");
             tableMapping.ColumnMappings.Add("Категория", "Категория");
@@ -11442,11 +11871,9 @@ namespace dodoisbase.dodoDSTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Товар` WHERE ((`ID_Товара` = ?) AND ((? = 1 AND `ID_Ингредиента` IS NULL) OR (`ID_Ингредиента` = ?)) AND ((? = 1 AND `Название` IS NULL) OR (`Название` = ?)) AND ((? = 1 AND `Цена` IS NULL) OR (`Цена` = ?)) AND ((? = 1 AND `Категория` IS NULL) OR (`Категория` = ?)) AND ((? = 1 AND `Калорийность` IS NULL) OR (`Калорийность` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Товар` WHERE ((`ID_Товара` = ?) AND ((? = 1 AND `Название` IS NULL) OR (`Название` = ?)) AND ((? = 1 AND `Цена` IS NULL) OR (`Цена` = ?)) AND ((? = 1 AND `Категория` IS NULL) OR (`Категория` = ?)) AND ((? = 1 AND `Калорийность` IS NULL) OR (`Калорийность` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Название", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Название", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Цена", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Цена", global::System.Data.DataRowVersion.Original, true, null));
@@ -11457,26 +11884,22 @@ namespace dodoisbase.dodoDSTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Калорийность", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Калорийность", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Товар` (`ID_Ингредиента`, `Название`, `Цена`, `Категория`, `Калорийн" +
-                "ость`) VALUES (?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `Товар` (`Название`, `Цена`, `Категория`, `Калорийность`) VALUES (?, " +
+                "?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Название", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Цена", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Цена", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Категория", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Категория", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Калорийность", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Калорийность", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Товар` SET `ID_Ингредиента` = ?, `Название` = ?, `Цена` = ?, `Категория` = ?, `Калорийность` = ? WHERE ((`ID_Товара` = ?) AND ((? = 1 AND `ID_Ингредиента` IS NULL) OR (`ID_Ингредиента` = ?)) AND ((? = 1 AND `Название` IS NULL) OR (`Название` = ?)) AND ((? = 1 AND `Цена` IS NULL) OR (`Цена` = ?)) AND ((? = 1 AND `Категория` IS NULL) OR (`Категория` = ?)) AND ((? = 1 AND `Калорийность` IS NULL) OR (`Калорийность` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `Товар` SET `Название` = ?, `Цена` = ?, `Категория` = ?, `Калорийность` = ? WHERE ((`ID_Товара` = ?) AND ((? = 1 AND `Название` IS NULL) OR (`Название` = ?)) AND ((? = 1 AND `Цена` IS NULL) OR (`Цена` = ?)) AND ((? = 1 AND `Категория` IS NULL) OR (`Категория` = ?)) AND ((? = 1 AND `Калорийность` IS NULL) OR (`Калорийность` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Название", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Цена", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Цена", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Категория", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Категория", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Калорийность", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Калорийность", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Название", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Название", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Название", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Цена", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Цена", global::System.Data.DataRowVersion.Original, true, null));
@@ -11497,17 +11920,11 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Товар.*\r\nFROM     Товар";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
-            this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT [ID_Ингредиента], [ID_Товара], Калорийность, Категория, Название, Цена FRO" +
-                "M Товар WHERE ([ID_Товара] = ?)";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11529,32 +11946,6 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual dodoDS.ТоварDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dodoDS.ТоварDataTable dataTable = new dodoDS.ТоварDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillBy(dodoDS.ТоварDataTable dataTable, int ID_Товара) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID_Товара));
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual dodoDS.ТоварDataTable GetDataBy(int ID_Товара) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID_Товара));
             dodoDS.ТоварDataTable dataTable = new dodoDS.ТоварDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -11593,47 +11984,39 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID_Товара, global::System.Nullable<int> Original_ID_Ингредиента, string Original_Название, global::System.Nullable<int> Original_Цена, string Original_Категория, global::System.Nullable<int> Original_Калорийность) {
+        public virtual int Delete(int Original_ID_Товара, string Original_Название, global::System.Nullable<int> Original_Цена, string Original_Категория, global::System.Nullable<int> Original_Калорийность) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID_Товара));
-            if ((Original_ID_Ингредиента.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ID_Ингредиента.Value));
-            }
-            else {
+            if ((Original_Название == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((Original_Название == null)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Название));
+            }
+            if ((Original_Цена.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_Цена.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Название));
-            }
-            if ((Original_Цена.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_Цена.Value));
-            }
-            else {
+            if ((Original_Категория == null)) {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((Original_Категория == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
             else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_Категория));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Категория));
             }
             if ((Original_Калорийность.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_Калорийность.Value));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_Калорийность.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -11655,36 +12038,30 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> ID_Ингредиента, string Название, global::System.Nullable<int> Цена, string Категория, global::System.Nullable<int> Калорийность) {
-            if ((ID_Ингредиента.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID_Ингредиента.Value));
-            }
-            else {
+        public virtual int Insert(string Название, global::System.Nullable<int> Цена, string Категория, global::System.Nullable<int> Калорийность) {
+            if ((Название == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((Название == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Название));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Название));
             }
             if ((Цена.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Цена.Value));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Цена.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             if ((Категория == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Категория));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Категория));
             }
             if ((Калорийность.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Калорийность.Value));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Калорийность.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -11706,77 +12083,412 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> ID_Ингредиента, string Название, global::System.Nullable<int> Цена, string Категория, global::System.Nullable<int> Калорийность, int Original_ID_Товара, global::System.Nullable<int> Original_ID_Ингредиента, string Original_Название, global::System.Nullable<int> Original_Цена, string Original_Категория, global::System.Nullable<int> Original_Калорийность) {
+        public virtual int Update(string Название, global::System.Nullable<int> Цена, string Категория, global::System.Nullable<int> Калорийность, int Original_ID_Товара, string Original_Название, global::System.Nullable<int> Original_Цена, string Original_Категория, global::System.Nullable<int> Original_Калорийность) {
+            if ((Название == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Название));
+            }
+            if ((Цена.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Цена.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((Категория == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Категория));
+            }
+            if ((Калорийность.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Калорийность.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID_Товара));
+            if ((Original_Название == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Название));
+            }
+            if ((Original_Цена.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Цена.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Категория == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Категория));
+            }
+            if ((Original_Калорийность.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Калорийность.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class SostTovarIngrTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public SostTovarIngrTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "SostTovarIngr";
+            tableMapping.ColumnMappings.Add("Код", "Код");
+            tableMapping.ColumnMappings.Add("ID_Товара", "ID_Товара");
+            tableMapping.ColumnMappings.Add("ID_Ингредиента", "ID_Ингредиента");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `SostTovarIngr` WHERE ((`Код` = ?) AND ((? = 1 AND `ID_Товара` IS NUL" +
+                "L) OR (`ID_Товара` = ?)) AND ((? = 1 AND `ID_Ингредиента` IS NULL) OR (`ID_Ингре" +
+                "диента` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Код", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Код", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `SostTovarIngr` (`ID_Товара`, `ID_Ингредиента`) VALUES (?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE `SostTovarIngr` SET `ID_Товара` = ?, `ID_Ингредиента` = ? WHERE ((`Код` = " +
+                "?) AND ((? = 1 AND `ID_Товара` IS NULL) OR (`ID_Товара` = ?)) AND ((? = 1 AND `I" +
+                "D_Ингредиента` IS NULL) OR (`ID_Ингредиента` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Код", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Код", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Товара", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Товара", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID_Ингредиента", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID_Ингредиента", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::dodoisbase.Properties.Settings.Default.DodobaseConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT SostTovarIngr.*\r\nFROM     SostTovarIngr";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dodoDS.SostTovarIngrDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dodoDS.SostTovarIngrDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dodoDS.SostTovarIngrDataTable dataTable = new dodoDS.SostTovarIngrDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dodoDS.SostTovarIngrDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dodoDS dataSet) {
+            return this.Adapter.Update(dataSet, "SostTovarIngr");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_Код, global::System.Nullable<int> Original_ID_Товара, global::System.Nullable<int> Original_ID_Ингредиента) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Код));
+            if ((Original_ID_Товара.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ID_Товара.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ID_Ингредиента.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ID_Ингредиента.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<int> ID_Товара, global::System.Nullable<int> ID_Ингредиента) {
+            if ((ID_Товара.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID_Товара.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             if ((ID_Ингредиента.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID_Ингредиента.Value));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ID_Ингредиента.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<int> ID_Товара, global::System.Nullable<int> ID_Ингредиента, int Original_Код, global::System.Nullable<int> Original_ID_Товара, global::System.Nullable<int> Original_ID_Ингредиента) {
+            if ((ID_Товара.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID_Товара.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((Название == null)) {
+            if ((ID_Ингредиента.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ID_Ингредиента.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Название));
-            }
-            if ((Цена.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Цена.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Категория == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_Код));
+            if ((Original_ID_Товара.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID_Товара.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Категория));
-            }
-            if ((Калорийность.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Калорийность.Value));
-            }
-            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID_Товара));
             if ((Original_ID_Ингредиента.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID_Ингредиента.Value));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ID_Ингредиента.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Название == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Название));
-            }
-            if ((Original_Цена.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_Цена.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Категория == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Категория));
-            }
-            if ((Original_Калорийность.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Калорийность.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12277,6 +12989,8 @@ namespace dodoisbase.dodoDSTableAdapters {
         
         private ТоварTableAdapter _товарTableAdapter;
         
+        private SostTovarIngrTableAdapter _sostTovarIngrTableAdapter;
+        
         private ИнгредиентыTableAdapter _ингредиентыTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
@@ -12453,6 +13167,20 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
+        public SostTovarIngrTableAdapter SostTovarIngrTableAdapter {
+            get {
+                return this._sostTovarIngrTableAdapter;
+            }
+            set {
+                this._sostTovarIngrTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
         public ИнгредиентыTableAdapter ИнгредиентыTableAdapter {
             get {
                 return this._ингредиентыTableAdapter;
@@ -12525,6 +13253,10 @@ namespace dodoisbase.dodoDSTableAdapters {
                             && (this._товарTableAdapter.Connection != null))) {
                     return this._товарTableAdapter.Connection;
                 }
+                if (((this._sostTovarIngrTableAdapter != null) 
+                            && (this._sostTovarIngrTableAdapter.Connection != null))) {
+                    return this._sostTovarIngrTableAdapter.Connection;
+                }
                 if (((this._ингредиентыTableAdapter != null) 
                             && (this._ингредиентыTableAdapter.Connection != null))) {
                     return this._ингредиентыTableAdapter.Connection;
@@ -12575,6 +13307,9 @@ namespace dodoisbase.dodoDSTableAdapters {
                 if ((this._товарTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._sostTovarIngrTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 if ((this._ингредиентыTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -12607,15 +13342,6 @@ namespace dodoisbase.dodoDSTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._ингредиентыTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._ингредиентыTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._заказTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Заказ.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -12640,6 +13366,15 @@ namespace dodoisbase.dodoDSTableAdapters {
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._товарTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._ингредиентыTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._ингредиентыTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -12697,6 +13432,15 @@ namespace dodoisbase.dodoDSTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._sostTovarIngrTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SostTovarIngr.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sostTovarIngrTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -12723,14 +13467,6 @@ namespace dodoisbase.dodoDSTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._ингредиентыTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._ингредиентыTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._заказTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Заказ.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -12752,6 +13488,14 @@ namespace dodoisbase.dodoDSTableAdapters {
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._товарTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._ингредиентыTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._ингредиентыTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -12803,6 +13547,14 @@ namespace dodoisbase.dodoDSTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._sostTovarIngrTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SostTovarIngr.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sostTovarIngrTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -12813,6 +13565,14 @@ namespace dodoisbase.dodoDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")]
         private int UpdateDeletedRows(dodoDS dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._sostTovarIngrTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SostTovarIngr.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sostTovarIngrTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._состав_заказаTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Состав_заказа.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -12861,6 +13621,14 @@ namespace dodoisbase.dodoDSTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._ингредиентыTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._ингредиентыTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._товарTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Товар.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -12882,14 +13650,6 @@ namespace dodoisbase.dodoDSTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._заказTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._ингредиентыTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Ингредиенты.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._ингредиентыTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -13000,6 +13760,11 @@ namespace dodoisbase.dodoDSTableAdapters {
             }
             if (((this._товарTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._товарTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
+                        "r, должны использовать одинаковую строку подключения.");
+            }
+            if (((this._sostTovarIngrTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._sostTovarIngrTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
@@ -13139,6 +13904,15 @@ namespace dodoisbase.dodoDSTableAdapters {
                         adaptersWithAcceptChangesDuringUpdate.Add(this._товарTableAdapter.Adapter);
                     }
                 }
+                if ((this._sostTovarIngrTableAdapter != null)) {
+                    revertConnections.Add(this._sostTovarIngrTableAdapter, this._sostTovarIngrTableAdapter.Connection);
+                    this._sostTovarIngrTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._sostTovarIngrTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._sostTovarIngrTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._sostTovarIngrTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._sostTovarIngrTableAdapter.Adapter);
+                    }
+                }
                 if ((this._ингредиентыTableAdapter != null)) {
                     revertConnections.Add(this._ингредиентыTableAdapter, this._ингредиентыTableAdapter.Connection);
                     this._ингредиентыTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
@@ -13249,6 +14023,10 @@ namespace dodoisbase.dodoDSTableAdapters {
                 if ((this._товарTableAdapter != null)) {
                     this._товарTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._товарTableAdapter]));
                     this._товарTableAdapter.Transaction = null;
+                }
+                if ((this._sostTovarIngrTableAdapter != null)) {
+                    this._sostTovarIngrTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._sostTovarIngrTableAdapter]));
+                    this._sostTovarIngrTableAdapter.Transaction = null;
                 }
                 if ((this._ингредиентыTableAdapter != null)) {
                     this._ингредиентыTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._ингредиентыTableAdapter]));

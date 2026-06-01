@@ -52,11 +52,7 @@ namespace dodoisbase
             // Привязываем объект товара к BindingSource формы
             this.tovarBindingSource.DataSource = tovar;
 
-            // Если у товара уже есть ингредиент, устанавливаем его в ComboBox
-            if (tovar.Ингредиент != null)
-            {
-                comboBoxIngredients.SelectedValue = tovar.Ингредиент.ID_Ингредиента;
-            }
+           
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -66,7 +62,6 @@ namespace dodoisbase
 
             // 2. Принудительно обновляем связь с ингредиентом из ComboBox
             Tovar currentTovar = (Tovar)this.tovarBindingSource.Current;
-            currentTovar.Ингредиент = (Ingr)comboBoxIngredients.SelectedItem;
 
             // 3. Закрываем форму с результатом OK (сохранение выполнит вызывающая форма TovarListF)
             this.DialogResult = DialogResult.OK;

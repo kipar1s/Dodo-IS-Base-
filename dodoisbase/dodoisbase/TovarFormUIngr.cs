@@ -78,7 +78,6 @@ namespace dodoisbase.Nhibernate.Maping
 
             // 2. Принудительно обновляем связь с ингредиентом из ComboBox
             Tovar currentTovar = (Tovar)this.tovarbS.Current;
-            currentTovar.Ингредиент = (Ingr)this.ingrbS.Current;
 
             // 3. Закрываем форму с результатом OK (сохранение выполнит вызывающая форма TovarListF)
             this.DialogResult = DialogResult.OK;

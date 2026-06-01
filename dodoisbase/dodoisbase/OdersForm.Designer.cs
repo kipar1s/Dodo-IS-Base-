@@ -43,8 +43,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dodoDS = new dodoisbase.dodoDS();
+            this.заказBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bS_Oder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -150,19 +152,24 @@
             "Доставлен",
             "Отменен"});
             this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bS_Oder, "Статус", true));
+            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.заказBindingSource, "Статус", true));
+            this.comboBox1.DataSource = this.заказBindingSource;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Доставлен",
-            "Отменен"});
             this.comboBox1.Location = new System.Drawing.Point(335, 43);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 12;
+            this.comboBox1.ValueMember = "Статус";
             // 
             // dodoDS
             // 
             this.dodoDS.DataSetName = "dodoDS";
             this.dodoDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // заказBindingSource
+            // 
+            this.заказBindingSource.DataMember = "Заказ";
+            this.заказBindingSource.DataSource = this.dodoDS;
             // 
             // OdersForm
             // 
@@ -185,6 +192,7 @@
             this.Load += new System.EventHandler(this.OdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bS_Oder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,5 +214,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
         private dodoDS dodoDS;
+        private System.Windows.Forms.BindingSource заказBindingSource;
     }
 }
