@@ -70,12 +70,11 @@
             this.curierTableAdapter = new dodoisbase.dodoDSTableAdapters.КурьерTableAdapter();
             this.personalTableAdapter = new dodoisbase.dodoDSTableAdapters.СотрудникиTableAdapter();
             this.personalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iDКурьераDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.номерВУDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.телефонDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.машинаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.номермашиныDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.curierBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_Curier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bN_Oder)).BeginInit();
@@ -161,7 +160,7 @@
             this.gb_Curier.Controls.Add(this.lb_Warning);
             this.gb_Curier.Location = new System.Drawing.Point(19, 152);
             this.gb_Curier.Name = "gb_Curier";
-            this.gb_Curier.Size = new System.Drawing.Size(770, 112);
+            this.gb_Curier.Size = new System.Drawing.Size(565, 123);
             this.gb_Curier.TabIndex = 57;
             this.gb_Curier.TabStop = false;
             this.gb_Curier.Text = "Курьер";
@@ -171,25 +170,24 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDКурьераDataGridViewTextBoxColumn,
-            this.номерВУDataGridViewTextBoxColumn,
-            this.телефонDataGridViewTextBoxColumn,
-            this.машинаDataGridViewTextBoxColumn,
-            this.номермашиныDataGridViewTextBoxColumn});
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
             this.dataGridView1.DataSource = this.curierBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 45);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(764, 64);
+            this.dataGridView1.Size = new System.Drawing.Size(559, 75);
             this.dataGridView1.TabIndex = 1;
             // 
             // bN_Oder
             // 
             this.bN_Oder.AddNewItem = this.curierbindingNavigatorAddNewItem1;
-            this.bN_Oder.BindingSource = this.curierBindingSource;
             this.bN_Oder.CountItem = this.bindingNavigatorCountItem1;
+            this.bN_Oder.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.curierBindingSource, "ID_Курьера", true));
             this.bN_Oder.DeleteItem = this.bindingNavigatorDeleteItem1;
             this.bN_Oder.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.bN_Oder.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -212,7 +210,7 @@
             this.bN_Oder.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
             this.bN_Oder.Name = "bN_Oder";
             this.bN_Oder.PositionItem = this.bindingNavigatorPositionItem1;
-            this.bN_Oder.Size = new System.Drawing.Size(764, 27);
+            this.bN_Oder.Size = new System.Drawing.Size(559, 27);
             this.bN_Oder.TabIndex = 0;
             this.bN_Oder.Text = "bN_Curier";
             // 
@@ -420,7 +418,6 @@
             // bN_User
             // 
             this.bN_User.AddNewItem = this.personalbindingNavigatorAddNewItem;
-            this.bN_User.BindingSource = this.personalBindingSource;
             this.bN_User.CountItem = this.bindingNavigatorCountItem;
             this.bN_User.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.personalBindingSource, "ID_Сотрудника", true));
             this.bN_User.DeleteItem = this.bindingNavigatorDeleteItem;
@@ -444,7 +441,7 @@
             this.bN_User.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bN_User.Name = "bN_User";
             this.bN_User.PositionItem = this.bindingNavigatorPositionItem;
-            this.bN_User.Size = new System.Drawing.Size(813, 27);
+            this.bN_User.Size = new System.Drawing.Size(836, 27);
             this.bN_User.TabIndex = 60;
             this.bN_User.Text = "bN_Personal";
             // 
@@ -464,59 +461,48 @@
             // personalBindingSource
             // 
             this.personalBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Personal);
-            this.personalBindingSource.CurrentChanged += new System.EventHandler(this.personalBindingSource_CurrentChanged);
-            // 
-            // iDКурьераDataGridViewTextBoxColumn
-            // 
-            this.iDКурьераDataGridViewTextBoxColumn.DataPropertyName = "ID_Курьера";
-            this.iDКурьераDataGridViewTextBoxColumn.HeaderText = "ID_Курьера";
-            this.iDКурьераDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDКурьераDataGridViewTextBoxColumn.Name = "iDКурьераDataGridViewTextBoxColumn";
-            this.iDКурьераDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // номерВУDataGridViewTextBoxColumn
-            // 
-            this.номерВУDataGridViewTextBoxColumn.DataPropertyName = "Номер_ВУ";
-            this.номерВУDataGridViewTextBoxColumn.HeaderText = "Номер_ВУ";
-            this.номерВУDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.номерВУDataGridViewTextBoxColumn.Name = "номерВУDataGridViewTextBoxColumn";
-            this.номерВУDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // телефонDataGridViewTextBoxColumn
-            // 
-            this.телефонDataGridViewTextBoxColumn.DataPropertyName = "Телефон";
-            this.телефонDataGridViewTextBoxColumn.HeaderText = "Телефон";
-            this.телефонDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.телефонDataGridViewTextBoxColumn.Name = "телефонDataGridViewTextBoxColumn";
-            this.телефонDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // машинаDataGridViewTextBoxColumn
-            // 
-            this.машинаDataGridViewTextBoxColumn.DataPropertyName = "Машина";
-            this.машинаDataGridViewTextBoxColumn.HeaderText = "Машина";
-            this.машинаDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.машинаDataGridViewTextBoxColumn.Name = "машинаDataGridViewTextBoxColumn";
-            this.машинаDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // номермашиныDataGridViewTextBoxColumn
-            // 
-            this.номермашиныDataGridViewTextBoxColumn.DataPropertyName = "Номер_машины";
-            this.номермашиныDataGridViewTextBoxColumn.HeaderText = "Номер_машины";
-            this.номермашиныDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.номермашиныDataGridViewTextBoxColumn.Name = "номермашиныDataGridViewTextBoxColumn";
-            this.номермашиныDataGridViewTextBoxColumn.Width = 125;
             // 
             // curierBindingSource
             // 
             this.curierBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Curier);
-            this.curierBindingSource.AddingNew += new System.ComponentModel.AddingNewEventHandler(this.curierBindingSource_AddingNew);
-            this.curierBindingSource.CurrentChanged += new System.EventHandler(this.curierBindingSource_CurrentChanged);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Номер_ВУ";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Номер_ВУ";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Телефон";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Телефон";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Машина";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Машина";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Номер_машины";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Номер_машины";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 125;
             // 
             // CurierFormUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 277);
+            this.ClientSize = new System.Drawing.Size(836, 288);
             this.Controls.Add(this.bN_User);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
@@ -529,6 +515,7 @@
             this.Controls.Add(this.label2);
             this.Name = "CurierFormUnit";
             this.Text = "Форма Курьера";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CurierFormUnit_FormClosing);
             this.Load += new System.EventHandler(this.CurierFormUnit_Load);
             this.gb_Curier.ResumeLayout(false);
             this.gb_Curier.PerformLayout();
@@ -551,9 +538,7 @@
         private System.Windows.Forms.Button btn_OK;
         private System.Windows.Forms.TextBox tb_FIO;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.BindingSource curierBindingSource;
         private System.Windows.Forms.Button btn_Cuncel;
-        private System.Windows.Forms.BindingSource personalBindingSource;
         private dodoDS dodoDS;
         private dodoDSTableAdapters.КурьерTableAdapter curierTableAdapter;
         private System.Windows.Forms.Label lb_Warning;
@@ -594,5 +579,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn машинаDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn номермашиныDataGridViewTextBoxColumn;
         private dodoDSTableAdapters.СотрудникиTableAdapter personalTableAdapter;
+        private System.Windows.Forms.BindingSource personalBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.BindingSource curierBindingSource;
     }
 }

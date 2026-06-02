@@ -1,4 +1,9 @@
-﻿using System;
+﻿using dodoisbase.Nhibernate.Entites;
+using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Mapping;
+using NHibernate.Tool.hbm2ddl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
-using dodoisbase.Nhibernate.Entites;
 
 namespace dodoisbase
 {
@@ -50,12 +50,19 @@ namespace dodoisbase
             if (curier != null && curier.ID_Курьера > 0)
             {//Редактирование
                 state = State_CurierFormUnit.Update;
-                ShowOderList();
+                ShowCurierDetails();
+                // Убедимся, что сотрудник загружен (для отображения ФИО)
+                if (curier.Сотрудник != null)
+                {
+                    NHibernateUtil.Initialize(curier.Сотрудник);
+                }
+                ShowCurierDetails();
+                LoadCuriersForCurrentPersonal();
             }
             else
             {//Создание
                 state = State_CurierFormUnit.Create;
-                HideOderList();
+                HideCurierDetails();
             }
         }
         public void SetDataSourse(Curier curier)
@@ -68,11 +75,29 @@ namespace dodoisbase
         {
             this.curierBindingSource.EndEdit();
 
+            // Привязываем выбранного сотрудника из ComboBox к курьеру
+            if (this.personalBindingSource.Current != null)
+            {
+                var selectedPersonal = (Personal)this.personalBindingSource.Current;
+                curier.Сотрудник = selectedPersonal;
+            }
+
             if (state == State_CurierFormUnit.Create)
             {
+
+                // Сохраняем нового курьера
+                nhibernate_session.Save(curier);
+                nhibernate_session.Flush();
+
                 // При создании ID еще нет, он будет присвоен при сохранении в БД
-                ShowOderList();
+                ShowCurierDetails();
                 state = State_CurierFormUnit.Update;
+            }
+            else
+            {
+                // Обновляем существующего
+                nhibernate_session.Merge(curier);
+                nhibernate_session.Flush();
             }
         }
 
@@ -87,11 +112,7 @@ namespace dodoisbase
 
             if (this.personalBindingSource.Current == null) return;
 
-            //Выполнение загрузки заказов данного клиента
-            this.curierTableAdapter.FillByIDСотрудника(
-                this.dodoDS.Курьер,
-                GetCurrentСотрудникID()
-                );
+            LoadCuriersForCurrentPersonal();
         }
 
      
@@ -102,13 +123,13 @@ namespace dodoisbase
             var personal = (Personal)this.personalBindingSource.Current;
             return personal.ID_Сотрудника;
         }
-        void ShowOderList()
+        void ShowCurierDetails()
         {
             lb_Warning.Visible = false;
             gb_Curier.Visible = true;
         }
 
-        void HideOderList()
+        void HideCurierDetails()
         {
             lb_Warning.Visible = true;
             gb_Curier.Visible = false;
@@ -138,7 +159,7 @@ namespace dodoisbase
                 nhibernate_session.Flush();
 
                 // Обновляем список
-                UdateCurierGrid();
+                LoadCuriersForCurrentPersonal();
             }
         }
 
@@ -147,7 +168,7 @@ namespace dodoisbase
             // Создание нового курьера - сначала нужно создать сотрудника
             MessageBox.Show("Сначала создайте сотрудника в списке сотрудников!");
             state = State_CurierFormUnit.Create;
-            HideOderList();
+            HideCurierDetails();
         }
 
         private void curierBindingSource_AddingNew(object sender, AddingNewEventArgs e)
@@ -169,37 +190,54 @@ namespace dodoisbase
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            // Кнопка удаления
+            // Кнопка удаления курьера
             if (this.curierBindingSource.Current == null) return;
 
-            var result = MessageBox.Show("Удалить курьера?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var curierToDelete = (Curier)this.curierBindingSource.Current;
+            var fio = curierToDelete.ФИО ?? "без имени";
+
+            var result = MessageBox.Show(
+                $"Удалить курьера {fio}?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                var curierToDelete = (Curier)this.curierBindingSource.Current;
                 nhibernate_session.Delete(curierToDelete);
                 nhibernate_session.Flush();
-                UdateCurierGrid();
+                LoadCuriersForCurrentPersonal();
             }
         }
 
-        void UdateCurierGrid()
+        void LoadCuriersForCurrentPersonal()
         {
-            // Обновление списка курьеров
             if (this.personalBindingSource.Current != null)
             {
                 var personal = (Personal)this.personalBindingSource.Current;
-                curiers = nhibernate_session.QueryOver<Curier>()
-                    .Where(c => c.Сотрудник.ID_Сотрудника == personal.ID_Сотрудника)
-                    .List<Curier>();
+                int personalId = personal.ID_Сотрудника;
+
+                // Загружаем курьеров, у которых Сотрудник.ID_Сотрудника = personalId
+                curiers = nhibernate_session.QueryOver <Curier > ()
+                    .JoinQueryOver(c => c.Сотрудник)
+                    .Where(s => s.ID_Сотрудника == personalId)
+                    .List < Curier > ();
             }
             else
             {
-                curiers = new List<Curier>();
+                curiers = new List< Curier > ();
             }
             this.curierBindingSource.DataSource = curiers;
         }
-    
+        void UdateCurierGrid()
+        {
+            LoadCuriersForCurrentPersonal();
+        }
+        private void CurierFormUnit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Закрываем сессию при закрытии формы
+            nhibernate_session?.Close();
+        }
+
     }
 }

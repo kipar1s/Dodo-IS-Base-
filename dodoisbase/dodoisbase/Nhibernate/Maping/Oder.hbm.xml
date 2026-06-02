@@ -14,16 +14,19 @@
 		<property name="Сумма" column="[Сумма]" />
 		<property name="Статус" column="[Статус]" />
 		<property name="Адресс_доставки" column="[Адресс_доставки]" />
-		<!--
-		<bag name="PersonalList" table ="[Доставка]">
-			 <key column="[ID_Заказа]"/>
-			<many-to-one class="Personal" column="[ID_Сотрудника]"/>
-		</bag>	
-
+		<!-- Многие-ко-многим: один сотрудник → много заказов -->
+        <many-to-one name="Personal" column="[ID_Сотрудника]" cascade="merge" />
+		
+		<!-- Один-ко-многим через Доставку -->
+		<bag name="Dostavkas" table ="[Доставка]" inverse="true">
+			<key column="[ID_Заказа]"/>
+			<one-to-many class="Dostavka"/>
+		</bag>
+        <!-- Многие-ко-многим: заказ ↔ товары -->
 		<bag name="TovarList" table ="[Состав_заказа]">
 			 <key column="[ID_Заказа]"/>
 			<many-to-many class="Tovar" column="[ID_Товара]"/>
 			
-		</bag> -->
+		</bag> 
 	</class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@
 	
 	<class name="Tovar" table="[Товар]">
 		<id name="ID_Товара" column="[ID_Товара]">
-			<generator class="assigned" />
+			<generator class="native" />
 		</id>
 		
 		
@@ -14,9 +14,9 @@
 		<property name="Категория" column="[Категория]" />
 		<property name="Калорийность" column="[Калорийность]" />
 
-		<bag name="SostTovarIngr">
+		<bag name="Ingrs" table="[SostTovarIngr]" >
 			<key column="[ID_Товара]"/>
-			<many-to-many class="Ingrs" column="[ID_Ингредиента]"/>
+			<many-to-many class="Ingr" column="[ID_Ингредиента]"/>
 
 		</bag>
 	</class>

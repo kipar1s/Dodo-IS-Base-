@@ -1,18 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using dodoisbase.Nhibernate.Entites;
+using System;
 using System.Windows.Forms;
 using NHibernate;
 using NHibernate.Cfg;
-using dodoisbase.Nhibernate.Entites;
 
 namespace dodoisbase
 {
     public partial class TovarFormU : Form
     {
-        // Список ингредиентов для выпадающего списка
-        IList<Ingr> allIngredients;
         ISession nhibernate_session;
 
+        private readonly string[] categories = new string[]
+        {
+            "Пицца", "Закуска", "Напитки", "Десерты", "Соусы"
+        };
+
+        // Конструктор с сессией (из TovarListF)
+        public TovarFormU(ISession session)
+        {
+            InitializeComponent();
+            nhibernate_session = session;
+        }
+
+        // Старый конструктор
         public TovarFormU()
         {
             InitializeComponent();
@@ -20,58 +30,72 @@ namespace dodoisbase
 
         private void TovarFormU_Load(object sender, EventArgs e)
         {
-            // Инициализируем сессию для загрузки списка ингредиентов
-            var c = new Configuration();
-            c.Configure();
-            c.AddAssembly("dodoisbase");
-            nhibernate_session = c.BuildSessionFactory().OpenSession();
+            // Если сессия не передана — создаём свою
+            if (nhibernate_session == null || !nhibernate_session.IsOpen)
+            {
+                var c = new Configuration();
+                c.Configure();
+                c.AddAssembly("dodoisbase");
+                nhibernate_session = c.BuildSessionFactory().OpenSession();
+            }
 
-            // Загружаем все ингредиенты, чтобы пользователь мог выбрать один из них
-            LoadIngredients();
+            LoadCategories();
         }
 
-        private void LoadIngredients()
+        private void LoadCategories()
         {
-            try
+            if (comboBoxCatTov != null)
             {
-                allIngredients = nhibernate_session.QueryOver<Ingr>().List();
-                // Привязываем список ингредиентов к ComboBox
-                // Предполагается, что на форме есть comboBoxIngredients
-                comboBoxIngredients.DataSource = allIngredients;
-                comboBoxIngredients.DisplayMember = "Название"; // Что видим
-                comboBoxIngredients.ValueMember = "ID_Ингредиента"; // Что сохраняем
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка загрузки списка ингредиентов: " + ex.Message);
+                comboBoxCatTov.DataSource = categories;
+                comboBoxCatTov.DropDownStyle = ComboBoxStyle.DropDownList;
             }
         }
 
         public void SetDataSourse(Tovar tovar)
         {
-            // Привязываем объект товара к BindingSource формы
             this.tovarBindingSource.DataSource = tovar;
 
-           
+            if (comboBoxCatTov != null && !string.IsNullOrEmpty(tovar.Категория))
+            {
+                comboBoxCatTov.SelectedItem = tovar.Категория;
+            }
+            else
+            {
+                comboBoxCatTov.SelectedIndex = 0;
+            }
         }
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            // 1. Завершаем редактирование в BindingSource
-            this.tovarBindingSource.EndEdit();
+            try
+            {
+                this.tovarBindingSource.EndEdit();
+                Tovar currentTovar = (Tovar)this.tovarBindingSource.Current;
 
-            // 2. Принудительно обновляем связь с ингредиентом из ComboBox
-            Tovar currentTovar = (Tovar)this.tovarBindingSource.Current;
+                if (comboBoxCatTov != null && comboBoxCatTov.SelectedItem != null)
+                {
+                    currentTovar.Категория = comboBoxCatTov.SelectedItem.ToString();
+                }
 
-            // 3. Закрываем форму с результатом OK (сохранение выполнит вызывающая форма TovarListF)
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка сохранения: " + ex.Message);
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        // НЕ закрываем сессию здесь!
+        private void TovarFormU_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // nhibernate_session?.Close(); ← УБРАТЬ!
         }
     }
 }

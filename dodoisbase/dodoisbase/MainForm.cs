@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dodoisbase.nhibPersonal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -92,6 +93,13 @@ namespace dodoisbase
             SostOderListF sostOderListF = new SostOderListF();
             sostOderListF.MdiParent = this;
             sostOderListF.Show();
+        }
+
+        private void сотрудникиNHibToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nhibPersonalListForm nhibPersonal_List_Form = new nhibPersonalListForm();
+            nhibPersonal_List_Form.MdiParent = this;
+            nhibPersonal_List_Form.Show();
         }
     }
 }

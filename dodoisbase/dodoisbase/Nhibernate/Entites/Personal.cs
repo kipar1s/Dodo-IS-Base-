@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace dodoisbase.Nhibernate.Entites
 {
-    public class Personal
+    public class Personal : Employee
     {
+        // One-to-many через Доставку
+        public virtual IList<Dostavka> Dostavkas { get; set; }
 
-        public virtual int ID_Сотрудника { get; set; }
-        public virtual string ФИО { get; set; }
-        public virtual int Стаж { get; set; }
-        public virtual int ID_Категории { get; set; }
-        
-
+        // One-to-many: сотрудник принял заказы
+        public virtual IList<Oder> Orders { get; set; }
     }
 }

@@ -37,19 +37,19 @@
             this.товарTableAdapter = new dodoisbase.dodoDSTableAdapters.ТоварTableAdapter();
             this.dodoDS = new dodoisbase.dodoDS();
             this.ингредиентыTableAdapter = new dodoisbase.dodoDSTableAdapters.ИнгредиентыTableAdapter();
-            this.tovarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ingrbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.iDТовараDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.названиеDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ценаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.категорияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.калорийностьDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tovarBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ingrbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tovarBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingrbindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -106,14 +106,6 @@
             // ингредиентыTableAdapter
             // 
             this.ингредиентыTableAdapter.ClearBeforeFill = true;
-            // 
-            // tovarBindingSource
-            // 
-            this.tovarBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Tovar);
-            // 
-            // ingrbindingSource
-            // 
-            this.ingrbindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Ingr);
             // 
             // dataGridView1
             // 
@@ -174,6 +166,14 @@
             this.калорийностьDataGridViewTextBoxColumn.Name = "калорийностьDataGridViewTextBoxColumn";
             this.калорийностьDataGridViewTextBoxColumn.Width = 125;
             // 
+            // tovarBindingSource
+            // 
+            this.tovarBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Tovar);
+            // 
+            // ingrbindingSource
+            // 
+            this.ingrbindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Ingr);
+            // 
             // TovarListF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -187,9 +187,9 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tovarBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingrbindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,13 +200,13 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.BindingSource tovarBindingSource;
         private dodoDSTableAdapters.ТоварTableAdapter товарTableAdapter;
         private dodoDS dodoDS;
         private System.Windows.Forms.DataGridViewTextBoxColumn ingrDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource ingrbindingSource;
         private dodoDSTableAdapters.ИнгредиентыTableAdapter ингредиентыTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource tovarBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDТовараDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn названиеDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ценаDataGridViewTextBoxColumn;
