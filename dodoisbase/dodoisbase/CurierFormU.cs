@@ -18,62 +18,125 @@ namespace dodoisbase
     {
         ISession nhibernate_session;
         Curier curier;
-
+        Personal selectedPersonal;
         public CurierForm()
         {
             InitializeComponent();
         }
+        public CurierForm(ISession session)
+        {
+            InitializeComponent();
+            nhibernate_session = session;
+        }
 
         private void CurierForm_Load(object sender, EventArgs e)
         {
-            var c = new Configuration();
-            c.Configure();
-            c.AddAssembly("dodoisbase");
-            nhibernate_session = c.BuildSessionFactory().OpenSession();
-        }
-
-        public void CreateItem(int IDСотрудника, int ID_Курьера)
-        {
-            // Создаём нового курьера с привязкой к сотруднику
-            var personal = nhibernate_session.Get < Personal > (IDСотрудника);
-
-            curier = new Curier
+            // Если сессия не передана — создаём свою
+            if (nhibernate_session == null || !nhibernate_session.IsOpen)
             {
-                ID_Курьера = ID_Курьера,
-                Сотрудник = personal
-            };
+                var c = new Configuration();
+                c.Configure();
+                c.AddAssembly("dodoisbase");
+                nhibernate_session = c.BuildSessionFactory().OpenSession();
+            }
+            this.curierBindingSource.DataSource= nhibernate_session;
 
+
+
+        }
+        // === СОЗДАНИЕ ===
+        public void CreateItem()
+        {
+            curier = new Curier();
             this.curierBindingSource.DataSource = curier;
+
+            // Сразу открываем выбор сотрудника
+            SelectPersonal();
         }
 
+        // === РЕДАКТИРОВАНИЕ ===
         public void LoadItem(int ID_Курьера)
         {
-            curier = nhibernate_session.Get < Curier > (ID_Курьера);
+            curier = nhibernate_session.Get<Curier>(ID_Курьера);
+
             if (curier != null && curier.Сотрудник != null)
             {
                 NHibernateUtil.Initialize(curier.Сотрудник);
+                selectedPersonal = curier.Сотрудник;
             }
+
             this.curierBindingSource.DataSource = curier;
+        }
+
+        // Кнопка "Выбрать сотрудника" (если нужно поменять)
+        private void btnSelectPersonal_Click(object sender, EventArgs e)
+        {
+            SelectPersonal();
+        }
+
+        // Метод выбора сотрудника через диалог
+        private void SelectPersonal()
+        {
+            PersonalSelectionDialog dialog = new PersonalSelectionDialog(nhibernate_session);
+
+            // Если сотрудник уже выбран — подставляем
+            if (selectedPersonal != null)
+            {
+                dialog.SetSelectedPersonal(selectedPersonal.ID_Сотрудника);
+            }
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedPersonal = dialog.SelectedPersonal;
+                curier.Сотрудник = selectedPersonal;
+
+                // Обновляем отображение (ФИО, Стаж подтянутся из Сотрудник)
+                this.curierBindingSource.ResetBindings(false);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.curierBindingSource.EndEdit();
+            try
+            {
+                this.curierBindingSource.EndEdit();
 
-            if (curier.ID_Курьера == 0)
-            {
-                nhibernate_session.Save(curier);
+                // Проверяем, что сотрудник выбран
+                if (curier.Сотрудник == null || curier.Сотрудник.ID_Сотрудника == 0)
+                {
+                    MessageBox.Show("Выберите сотрудника!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (curier.ID_Курьера == 0)
+                {
+                    nhibernate_session.Save(curier);
+                }
+                else
+                {
+                    nhibernate_session.Merge(curier);
+                }
+
+                nhibernate_session.Flush();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                nhibernate_session.Merge(curier);
+                MessageBox.Show("Ошибка сохранения: " + ex.Message);
             }
-            nhibernate_session.Flush();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void CurierForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            nhibernate_session?.Close();
+            // Не закрываем сессию!
         }
     }
 }

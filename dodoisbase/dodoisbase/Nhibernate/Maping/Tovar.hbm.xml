@@ -17,7 +17,7 @@
 		<bag name="Ingrs" table="[SostTovarIngr]" >
 			<key column="[ID_Товара]"/>
 			<many-to-many class="Ingr" column="[ID_Ингредиента]"/>
-
 		</bag>
+		
 	</class>
 </hibernate-mapping>

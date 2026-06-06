@@ -176,6 +176,12 @@
     <Compile Include="nhibPersonal\nhibPersonalUnitForm.Designer.cs">
       <DependentUpon>nhibPersonalUnitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonalSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonalSelectionDialog.Designer.cs">
+      <DependentUpon>PersonalSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TovarFormUIngr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalListForm.resx">
       <DependentUpon>PersonalListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonalSelectionDialog.resx">
+      <DependentUpon>PersonalSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlategFormU.resx">
       <DependentUpon>PlategFormU.cs</DependentUpon>

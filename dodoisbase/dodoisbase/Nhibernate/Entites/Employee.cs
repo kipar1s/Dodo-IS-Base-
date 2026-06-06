@@ -12,8 +12,6 @@ namespace dodoisbase.Nhibernate.Entites
         public virtual string ФИО { get; set; }
         public virtual string Тип_сотрудника { get; set; }
         public virtual int Стаж { get; set; }
-
         public virtual Categori Категория { get; set; }
-
     }
 }

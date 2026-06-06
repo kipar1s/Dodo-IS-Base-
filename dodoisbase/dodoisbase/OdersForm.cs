@@ -29,7 +29,7 @@ namespace dodoisbase
         }
         public void LoadItem(int ID_Заказа)
         {
-            this.заказTableAdapter.FillBy(this.dodoDS.Заказ, ID_Заказа);
+            this.заказTableAdapter1.FillBy(this.dodoDS.Заказ, ID_Заказа);
         }
 
         private void OdersForm_Load(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace dodoisbase
         private void button1_Click(object sender, EventArgs e)
         {
             this.bS_Oder.EndEdit();
-            this.заказTableAdapter.Update(this.dodoDS.Заказ);
+            this.заказTableAdapter1.Update(this.dodoDS.Заказ);
         }
     }
 }

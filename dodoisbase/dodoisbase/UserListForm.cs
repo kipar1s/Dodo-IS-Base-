@@ -32,10 +32,8 @@ namespace dodoisbase
             {
                 //Обнова знач в таб
                 this.клиентTableAdapter.Fill(this.dodoDS.Клиент);
-            }
-            ;
+            };
         }
-
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             var row = ((DataRowView)this.клиентBindingSource.Current).Row;
@@ -47,8 +45,7 @@ namespace dodoisbase
             user_form_unit.LoadItem(user_id);
             user_form_unit.ShowDialog();
             //Обнова знач
-            this.клиентTableAdapter.Fill(this.dodoDS.Клиент);
-            
+            this.клиентTableAdapter.Fill(this.dodoDS.Клиент);            
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)

@@ -40,17 +40,20 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.curierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dodoDS = new dodoisbase.dodoDS();
             this.curierTableAdapter = new dodoisbase.dodoDSTableAdapters.КурьерTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.curierBindingSource)).BeginInit();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.comboBoxPersonal = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.curierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.curierBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(39, 230);
+            this.button1.Location = new System.Drawing.Point(39, 268);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(232, 68);
             this.button1.TabIndex = 21;
@@ -124,7 +127,7 @@
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.curierBindingSource, "Машина", true));
             this.textBox2.Location = new System.Drawing.Point(146, 150);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.Size = new System.Drawing.Size(137, 22);
             this.textBox2.TabIndex = 24;
             // 
             // textBox3
@@ -132,21 +135,17 @@
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.curierBindingSource, "Номер_машины", true));
             this.textBox3.Location = new System.Drawing.Point(146, 188);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.Size = new System.Drawing.Size(125, 22);
             this.textBox3.TabIndex = 23;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(36, 191);
+            this.label5.Location = new System.Drawing.Point(36, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 16);
             this.label5.TabIndex = 25;
             this.label5.Text = "Номер машины";
-            // 
-            // curierBindingSource
-            // 
-            this.curierBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Curier);
             // 
             // dodoDS
             // 
@@ -157,11 +156,46 @@
             // 
             this.curierTableAdapter.ClearBeforeFill = true;
             // 
+            // btn_cancel
+            // 
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_cancel.Location = new System.Drawing.Point(287, 268);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(232, 68);
+            this.btn_cancel.TabIndex = 28;
+            this.btn_cancel.Text = "Отменить";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // comboBoxPersonal
+            // 
+            this.comboBoxPersonal.FormattingEnabled = true;
+            this.comboBoxPersonal.Location = new System.Drawing.Point(146, 217);
+            this.comboBoxPersonal.Name = "comboBoxPersonal";
+            this.comboBoxPersonal.Size = new System.Drawing.Size(456, 24);
+            this.comboBoxPersonal.TabIndex = 29;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(62, 220);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 16);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Сотрудник";
+            // 
+            // curierBindingSource
+            // 
+            this.curierBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Curier);
+            // 
             // CurierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 313);
+            this.ClientSize = new System.Drawing.Size(614, 348);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBoxPersonal);
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox3);
@@ -175,8 +209,9 @@
             this.Controls.Add(this.label1);
             this.Name = "CurierForm";
             this.Text = "Форма \"Курьер\"";
-            ((System.ComponentModel.ISupportInitialize)(this.curierBindingSource)).EndInit();
+            this.Load += new System.EventHandler(this.CurierForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.curierBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +232,8 @@
         private System.Windows.Forms.Label label5;
         private dodoDS dodoDS;
         private dodoDSTableAdapters.КурьерTableAdapter curierTableAdapter;
+        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.ComboBox comboBoxPersonal;
+        private System.Windows.Forms.Label label6;
     }
 }

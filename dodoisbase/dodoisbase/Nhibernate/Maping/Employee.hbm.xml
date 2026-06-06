@@ -8,17 +8,14 @@
 		<id name="ID_Сотрудника" column="[ID_Сотрудника]">
 			<generator class="native" />
 		</id>
-
 		<!-- Дискриминатор для различения подклассов -->
-		<discriminator column="[Тип_сотрудника]" type="String" length="1" insert="true" force="true"/>
-		
+		<discriminator column="[Тип_сотрудника]" type="String" 
+					   length="1" insert="true" force="true"/>		
 		<property name="ФИО" column="[ФИО]"/>
 		<property name="Стаж" column="[Стаж]"/>
-
 		<!-- Выпадающий список: Категория (many-to-one) -->
 		<many-to-one name="Категория" column="[ID_Категории]"
                      class="Categori" cascade="merge" not-null="false"/>
-
 		<!-- Подкласс: обычный сотрудник -->
 		<subclass name="Personal" discriminator-value="P">
 			<bag name="Dostavkas" inverse="true">
@@ -30,7 +27,6 @@
 				<one-to-many class="Oder"/>
 			</bag>
 		</subclass>
-
 		<!-- Подкласс: оцениваемый сотрудник -->
 		<subclass name="Evaluation" discriminator-value="E">
 			<property name="Пиццерия" column="[Пиццерия]"/>

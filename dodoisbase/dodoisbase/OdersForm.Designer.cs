@@ -39,14 +39,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTPOder = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
-            this.заказTableAdapter = new dodoisbase.dodoDSTableAdapters.ЗаказTableAdapter();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dodoDS = new dodoisbase.dodoDS();
             this.заказBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dodoDS = new dodoisbase.dodoDS();
+            this.заказBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.заказTableAdapter1 = new dodoisbase.dodoDSTableAdapters.ЗаказTableAdapter();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.bS_Oder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -67,6 +69,11 @@
             this.tb_id.ReadOnly = true;
             this.tb_id.Size = new System.Drawing.Size(53, 22);
             this.tb_id.TabIndex = 1;
+            // 
+            // bS_Oder
+            // 
+            this.bS_Oder.DataMember = "Заказ";
+            this.bS_Oder.DataSource = this.dodoDS;
             // 
             // label2
             // 
@@ -133,10 +140,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // заказTableAdapter
-            // 
-            this.заказTableAdapter.ClearBeforeFill = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -146,30 +149,36 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Статус заказа";
             // 
-            // comboBox1
+            // заказBindingSource
             // 
-            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
-            "Доставлен",
-            "Отменен"});
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bS_Oder, "Статус", true));
-            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.заказBindingSource, "Статус", true));
-            this.comboBox1.DataSource = this.заказBindingSource;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(335, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 12;
-            this.comboBox1.ValueMember = "Статус";
+            this.заказBindingSource.DataMember = "Заказ";
+            this.заказBindingSource.DataSource = this.dodoDS;
             // 
             // dodoDS
             // 
             this.dodoDS.DataSetName = "dodoDS";
             this.dodoDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // заказBindingSource
+            // заказBindingSource1
             // 
-            this.заказBindingSource.DataMember = "Заказ";
-            this.заказBindingSource.DataSource = this.dodoDS;
+            this.заказBindingSource1.DataMember = "Заказ";
+            this.заказBindingSource1.DataSource = this.dodoDS;
+            // 
+            // заказTableAdapter1
+            // 
+            this.заказTableAdapter1.ClearBeforeFill = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.bS_Oder, "Статус", true));
+            this.comboBox1.DataSource = this.bS_Oder;
+            this.comboBox1.DisplayMember = "Статус";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(334, 40);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 11;
+            this.comboBox1.ValueMember = "Статус";
             // 
             // OdersForm
             // 
@@ -191,8 +200,9 @@
             this.Text = "Форма Заказа";
             this.Load += new System.EventHandler(this.OdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bS_Oder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.заказBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,10 +220,11 @@
         private System.Windows.Forms.DateTimePicker dateTPOder;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource bS_Oder;
-        private dodoDSTableAdapters.ЗаказTableAdapter заказTableAdapter;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
         private dodoDS dodoDS;
         private System.Windows.Forms.BindingSource заказBindingSource;
+        private System.Windows.Forms.BindingSource заказBindingSource1;
+        private dodoDSTableAdapters.ЗаказTableAdapter заказTableAdapter1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

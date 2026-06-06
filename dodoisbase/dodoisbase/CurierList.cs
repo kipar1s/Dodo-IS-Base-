@@ -45,69 +45,37 @@ namespace dodoisbase
 
         private void tsb_Create_Click(object sender, EventArgs e)
         {
-            Curier curier = new Curier();
+            CurierForm form = new CurierForm(nhibernate_session);
+            form.CreateItem(); // Без параметров — выбор сотрудника внутри
 
-            // При создании курьера нужно выбрать сотрудника
-            // Открываем форму курьера — там есть ComboBox для выбора сотрудника
-            CurierFormUnit curier_form_unit = new CurierFormUnit();
-            curier_form_unit.SetDataSourse(curier);
-
-            if (curier_form_unit.ShowDialog() == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                // Проверяем, что сотрудник выбран
-                if (curier.Сотрудник == null || curier.Сотрудник.ID_Сотрудника == 0)
-                {
-                    MessageBox.Show("Не выбран сотрудник!", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                nhibernate_session.Save(curier);
-                nhibernate_session.Flush();
-
-                // Обновление данных
+                nhibernate_session.Clear();
                 UdateCurierGrid();
             }
         }
 
         private void tsb_Edit_Click(object sender, EventArgs e)
         {
+            if (this.curierBindingSource.Current == null) return;
+
             var curier = (Curier)this.curierBindingSource.Current;
 
-            // Инициализируем ленивые загрузки перед клонированием            
-            if (curier == null)
-            {
-                MessageBox.Show("Выберите курьера для редактирования!");
-                return;
-            }
+            CurierForm form = new CurierForm(nhibernate_session);
+            form.LoadItem(curier.ID_Курьера);
 
-            // Инициализируем ленивые загрузки перед клонированием
-            // Теперь обращаемся через Сотрудник, а не через ID_Сотрудника
-            if (curier.Сотрудник != null)
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                NHibernateUtil.Initialize(curier.Сотрудник);
-            }
-
-            Curier curierClone = MyUtiletes.Clone<Curier>(curier);
-            CurierFormUnit curier_form_unit = new CurierFormUnit();
-            curier_form_unit.SetDataSourse(curier);
-            if (curier_form_unit.ShowDialog() == DialogResult.OK)
-            {
-                nhibernate_session.Merge(curierClone);
-                nhibernate_session.Flush();
-
-                //Обнов данных
+                nhibernate_session.Clear();
                 UdateCurierGrid();
             }
-        }       
+        }
+
         private void tsb_Delite_Click(object sender, EventArgs e)
         {
+            if (this.curierBindingSource.Current == null) return;
+
             var curier = (Curier)this.curierBindingSource.Current;
-            if (curier == null)
-            {
-                MessageBox.Show("Выберите курьера для удаления!");
-                return;
-            }
 
             var result = MessageBox.Show(
                 $"Удалить курьера {curier.ФИО ?? "без имени"}?",
@@ -117,8 +85,10 @@ namespace dodoisbase
 
             if (result == DialogResult.Yes)
             {
-                nhibernate_session.Delete(curier);
+                var toDelete = nhibernate_session.Get<Curier>(curier.ID_Курьера);
+                nhibernate_session.Delete(toDelete);
                 nhibernate_session.Flush();
+                nhibernate_session.Clear();
                 UdateCurierGrid();
             }
         }
