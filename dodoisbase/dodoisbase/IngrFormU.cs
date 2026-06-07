@@ -37,7 +37,21 @@ namespace dodoisbase
 
         private void InrgFormU_Load(object sender, EventArgs e)
         {
-            
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dodoDS.SostTovarIngr". При необходимости она может быть перемещена или удалена.
+            this.sostTovarIngrTableAdapter.Fill(this.dodoDS.SostTovarIngr);
+
+            // Заполняем ComboBox фиксированными значениями
+            cbUnit.DataSource = new string[] { "шт", "кг", "л", "мл", "г" };
+
+            // Привязываем к BindingSource сущности Ingr
+            // Предполагается, что на форме есть ingrBindingSource
+            cbUnit.DataBindings.Add(
+                "SelectedItem",           // свойство ComboBox
+                ингредиентыBindingSource,        // источник
+                "Единица_измерения",      // поле сущности
+                true,                     // formattingEnabled
+                DataSourceUpdateMode.OnPropertyChanged  // когда обновлять
+                );
         }
     }
 

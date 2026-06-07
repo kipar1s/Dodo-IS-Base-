@@ -43,14 +43,21 @@
             this.dateTPOder = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.ингредиентыTableAdapter = new dodoisbase.dodoDSTableAdapters.ИнгредиентыTableAdapter();
+            this.cbUnit = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ингредиентыSostTovarIngrBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sostTovarIngrTableAdapter = new dodoisbase.dodoDSTableAdapters.SostTovarIngrTableAdapter();
+            this.ingrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ингредиентыBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ингредиентыSostTovarIngrBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingrBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_save
             // 
             this.btn_save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_save.Location = new System.Drawing.Point(35, 248);
+            this.btn_save.Location = new System.Drawing.Point(38, 283);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(278, 48);
             this.btn_save.TabIndex = 47;
@@ -161,11 +168,45 @@
             // 
             this.ингредиентыTableAdapter.ClearBeforeFill = true;
             // 
+            // cbUnit
+            // 
+            this.cbUnit.DataSource = this.ingrBindingSource;
+            this.cbUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUnit.FormattingEnabled = true;
+            this.cbUnit.Location = new System.Drawing.Point(181, 239);
+            this.cbUnit.Name = "cbUnit";
+            this.cbUnit.Size = new System.Drawing.Size(121, 24);
+            this.cbUnit.TabIndex = 51;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 242);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(143, 16);
+            this.label6.TabIndex = 52;
+            this.label6.Text = "Единица Измерения";
+            // 
+            // ингредиентыSostTovarIngrBindingSource
+            // 
+            this.ингредиентыSostTovarIngrBindingSource.DataMember = "ИнгредиентыSostTovarIngr";
+            this.ингредиентыSostTovarIngrBindingSource.DataSource = this.ингредиентыBindingSource;
+            // 
+            // sostTovarIngrTableAdapter
+            // 
+            this.sostTovarIngrTableAdapter.ClearBeforeFill = true;
+            // 
+            // ingrBindingSource
+            // 
+            this.ingrBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Ingr);
+            // 
             // IngrFormU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 314);
+            this.ClientSize = new System.Drawing.Size(369, 352);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cbUnit);
             this.Controls.Add(this.dateTPOder);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox3);
@@ -182,6 +223,8 @@
             this.Load += new System.EventHandler(this.InrgFormU_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ингредиентыBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ингредиентыSostTovarIngrBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ingrBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,5 +245,10 @@
         private dodoDSTableAdapters.ИнгредиентыTableAdapter ингредиентыTableAdapter;
         private dodoDS dodoDS;
         private System.Windows.Forms.BindingSource ингредиентыBindingSource;
+        private System.Windows.Forms.ComboBox cbUnit;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.BindingSource ингредиентыSostTovarIngrBindingSource;
+        private dodoDSTableAdapters.SostTovarIngrTableAdapter sostTovarIngrTableAdapter;
+        private System.Windows.Forms.BindingSource ingrBindingSource;
     }
 }

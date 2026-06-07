@@ -12,6 +12,12 @@
 		<property name="Цена_за_ед" column="[Цена_за_ед]" />
 		<property name="Срок_годности" column="[Срок_годности]" />
 		<property name="Количество_на_складе" column="[Количество_на_складе]" />
+		<property name="Единица_измерения" column="[Единица_измерения]" />
+		
+		<bag name="Tovars" table="[SostTovarIngr]" inverse="true">
+			<key column="[ID_Ингредиента]"/>
+			<many-to-many class="Tovar" column="[ID_Товара]"/>
+		</bag>
 
 	</class>
 </hibernate-mapping>

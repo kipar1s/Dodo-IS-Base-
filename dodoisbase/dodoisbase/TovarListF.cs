@@ -4,12 +4,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace dodoisbase
@@ -17,7 +12,7 @@ namespace dodoisbase
     public partial class TovarListF : Form
     {
         ISession nhibernate_session;
-        IList<Tovar> tovars; // Переименовал в tovars для ясности (список)
+        IList<Tovar> tovars;
 
         public TovarListF()
         {
@@ -32,20 +27,16 @@ namespace dodoisbase
                 c.Configure();
                 c.AddAssembly("dodoisbase");
                 nhibernate_session = c.BuildSessionFactory().OpenSession();
-
-                // Выполним загрузку данных 
                 UpdateTovarGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка инициализации NHibernate: " + ex.Message);
+                MessageBox.Show("Ошибка инициализации: " + ex.Message);
             }
         }
 
         void UpdateTovarGrid()
         {
-            // Загрузка данных из таблицы товаров в массив объектов 
-            // Используем try-catch, чтобы увидеть ошибку, если маппинг все еще неверный
             try
             {
                 tovars = nhibernate_session.QueryOver<Tovar>().List<Tovar>();
@@ -53,60 +44,94 @@ namespace dodoisbase
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка загрузки товаров: " + ex.Message +
-                                "\nПроверьте файл Tovar.hbm.xml на опечатки.");
+                MessageBox.Show("Ошибка загрузки: " + ex.Message);
             }
         }
 
+        // === СОЗДАНИЕ ===
         private void tsb_Create_Click(object sender, EventArgs e)
         {
-            
             Tovar new_tovar = new Tovar();
+            new_tovar.Ingrs = new List<Ingr>();
 
-            TovarFormUIngr tovar_form_unit_ingr = new TovarFormUIngr();
-            tovar_form_unit_ingr.SetDataSourse(new_tovar);
+            // Шаг 1: Форма с ингредиентами — передаём сессию!
+            TovarFormUIngr formIngr = new TovarFormUIngr(nhibernate_session);
+            formIngr.SetDataSourse(new_tovar, GetAllIngredients());
 
-            if (tovar_form_unit_ingr.ShowDialog() == DialogResult.OK)
+            if (formIngr.ShowDialog() == DialogResult.OK)
             {
-                nhibernate_session.Save(new_tovar);
-                nhibernate_session.Flush();
+                // Шаг 2: Простая форма — передаём сессию!
+                TovarFormU formSimple = new TovarFormU(nhibernate_session);
+                formSimple.SetDataSourse(new_tovar);
 
-                // Обновление данных
-                UpdateTovarGrid();
+                if (formSimple.ShowDialog() == DialogResult.OK)
+                {
+                    // Сохраняем в той же сессии
+                    nhibernate_session.Save(new_tovar);
+                    nhibernate_session.Flush();
+                    UpdateTovarGrid();
+                }
             }
         }
 
+        // === РЕДАКТИРОВАНИЕ ===
         private void tsb_Edit_Click(object sender, EventArgs e)
         {
             if (this.tovarBindingSource.Current == null) return;
 
-            // Клонируем объект, чтобы изменения не применились сразу к списку без сохранения
-            Tovar selected_tovar = MyUtiletes.Clone<Tovar>((Tovar)this.tovarBindingSource.Current);
+            int tovarId = ((Tovar)this.tovarBindingSource.Current).ID_Товара;
 
-            TovarFormUIngr tovar_form_unit_ingr = new TovarFormUIngr();
-            tovar_form_unit_ingr.SetDataSourse(selected_tovar);
+            // Загружаем из БД в ТЕКУЩЕЙ сессии
+            Tovar tovar = nhibernate_session.Get<Tovar>(tovarId);
 
-            if (tovar_form_unit_ingr.ShowDialog() == DialogResult.OK)
+            if (tovar.Ingrs != null)
             {
-                nhibernate_session.Merge(selected_tovar);
-                nhibernate_session.Flush();
+                NHibernateUtil.Initialize(tovar.Ingrs);
+            }
 
-                // Обновление данных
-                UpdateTovarGrid();
+            // Шаг 1: Форма с ингредиентами — передаём сессию!
+            TovarFormUIngr formIngr = new TovarFormUIngr(nhibernate_session);
+            formIngr.SetDataSourse(tovar, GetAllIngredients());
+
+            if (formIngr.ShowDialog() == DialogResult.OK)
+            {
+                // Шаг 2: Простая форма — передаём сессию!
+                TovarFormU formSimple = new TovarFormU(nhibernate_session);
+                formSimple.SetDataSourse(tovar);
+
+                if (formSimple.ShowDialog() == DialogResult.OK)
+                {
+                    // Обновляем в той же сессии
+                    nhibernate_session.Merge(tovar);
+                    nhibernate_session.Flush();
+                    UpdateTovarGrid();
+                }
             }
         }
 
+        // === УДАЛЕНИЕ ===
         private void tsb_Delete_Click(object sender, EventArgs e)
         {
             if (this.tovarBindingSource.Current == null) return;
 
-            if (MessageBox.Show("Удалить выбранный товар?", "Подтверждение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Удалить товар?", "Подтверждение",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                Tovar current_tovar = (Tovar)this.tovarBindingSource.Current;
-                nhibernate_session.Delete(current_tovar);
+                Tovar current = (Tovar)this.tovarBindingSource.Current;
+                nhibernate_session.Delete(current);
                 nhibernate_session.Flush();
                 UpdateTovarGrid();
             }
+        }
+
+        private List<Ingr> GetAllIngredients()
+        {
+            return nhibernate_session.QueryOver<Ingr>().List<Ingr>().ToList();
+        }
+
+        private void TovarListF_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            nhibernate_session?.Close();
         }
     }
 }

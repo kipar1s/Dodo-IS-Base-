@@ -155,11 +155,33 @@
       <DependentUpon>IngrFormU.cs</DependentUpon>
     </Compile>
     <Compile Include="MyUtiletes.cs" />
+    <Compile Include="Nhibernate\Entites\Categori.cs" />
     <Compile Include="Nhibernate\Entites\Curier.cs" />
+    <Compile Include="Nhibernate\Entites\Dostavka.cs" />
+    <Compile Include="Nhibernate\Entites\Employee.cs" />
+    <Compile Include="Nhibernate\Entites\Evaluation.cs" />
     <Compile Include="Nhibernate\Entites\Ingr.cs" />
     <Compile Include="Nhibernate\Entites\Oder.cs" />
     <Compile Include="Nhibernate\Entites\Personal.cs" />
     <Compile Include="Nhibernate\Entites\Tovar.cs" />
+    <Compile Include="nhibPersonal\nhibPersonalListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nhibPersonal\nhibPersonalListForm.Designer.cs">
+      <DependentUpon>nhibPersonalListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nhibPersonal\nhibPersonalUnitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nhibPersonal\nhibPersonalUnitForm.Designer.cs">
+      <DependentUpon>nhibPersonalUnitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonalSelectionDialog.Designer.cs">
+      <DependentUpon>PersonalSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TovarFormUIngr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +298,12 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="nhibPersonal\nhibPersonalListForm.resx">
+      <DependentUpon>nhibPersonalListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nhibPersonal\nhibPersonalUnitForm.resx">
+      <DependentUpon>nhibPersonalUnitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OderFormUser.resx">
       <DependentUpon>OderFormUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PersonalListForm.resx">
       <DependentUpon>PersonalListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonalSelectionDialog.resx">
+      <DependentUpon>PersonalSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlategFormU.resx">
       <DependentUpon>PlategFormU.cs</DependentUpon>
@@ -362,7 +393,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Nhibernate\Maping\Perconal.hbm.xml">
+    <EmbeddedResource Include="Nhibernate\Maping\Employee.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -378,6 +409,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Nhibernate\Maping\Oder.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Nhibernate\Maping\Dostavka.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Nhibernate\Maping\Categori.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

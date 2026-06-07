@@ -37,21 +37,19 @@
             this.товарTableAdapter = new dodoisbase.dodoDSTableAdapters.ТоварTableAdapter();
             this.dodoDS = new dodoisbase.dodoDS();
             this.ингредиентыTableAdapter = new dodoisbase.dodoDSTableAdapters.ИнгредиентыTableAdapter();
-            this.tovarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ingrbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.iDТовараDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ингредиентDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDИнгредиентаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.названиеDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ценаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.категорияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.калорийностьDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tovarBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ingrbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tovarBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingrbindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -63,7 +61,7 @@
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1119, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1119, 27);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -72,7 +70,7 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(68, 28);
+            this.toolStripButton1.Size = new System.Drawing.Size(68, 24);
             this.toolStripButton1.Text = "Создать";
             this.toolStripButton1.Click += new System.EventHandler(this.tsb_Create_Click);
             // 
@@ -82,7 +80,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(82, 28);
+            this.toolStripButton2.Size = new System.Drawing.Size(82, 24);
             this.toolStripButton2.Text = "Изменить";
             this.toolStripButton2.Click += new System.EventHandler(this.tsb_Edit_Click);
             // 
@@ -92,7 +90,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(69, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(69, 24);
             this.toolStripButton3.Text = "Удалить";
             this.toolStripButton3.Click += new System.EventHandler(this.tsb_Delete_Click);
             // 
@@ -109,33 +107,23 @@
             // 
             this.ингредиентыTableAdapter.ClearBeforeFill = true;
             // 
-            // tovarBindingSource
-            // 
-            this.tovarBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Tovar);
-            // 
-            // ingrbindingSource
-            // 
-            this.ingrbindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Ingr);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDТовараDataGridViewTextBoxColumn,
-            this.ингредиентDataGridViewTextBoxColumn,
-            this.iDИнгредиентаDataGridViewTextBoxColumn,
             this.названиеDataGridViewTextBoxColumn,
             this.ценаDataGridViewTextBoxColumn,
             this.категорияDataGridViewTextBoxColumn,
             this.калорийностьDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.tovarBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 31);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 27);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1119, 419);
+            this.dataGridView1.Size = new System.Drawing.Size(1119, 423);
             this.dataGridView1.TabIndex = 6;
             // 
             // iDТовараDataGridViewTextBoxColumn
@@ -144,26 +132,7 @@
             this.iDТовараDataGridViewTextBoxColumn.HeaderText = "ID_Товара";
             this.iDТовараDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.iDТовараDataGridViewTextBoxColumn.Name = "iDТовараDataGridViewTextBoxColumn";
-            this.iDТовараDataGridViewTextBoxColumn.ReadOnly = true;
             this.iDТовараDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // ингредиентDataGridViewTextBoxColumn
-            // 
-            this.ингредиентDataGridViewTextBoxColumn.DataPropertyName = "Ингредиент";
-            this.ингредиентDataGridViewTextBoxColumn.HeaderText = "Ингредиент";
-            this.ингредиентDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ингредиентDataGridViewTextBoxColumn.Name = "ингредиентDataGridViewTextBoxColumn";
-            this.ингредиентDataGridViewTextBoxColumn.Visible = false;
-            this.ингредиентDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // iDИнгредиентаDataGridViewTextBoxColumn
-            // 
-            this.iDИнгредиентаDataGridViewTextBoxColumn.DataPropertyName = "IDИнгредиента";
-            this.iDИнгредиентаDataGridViewTextBoxColumn.HeaderText = "IDИнгредиента";
-            this.iDИнгредиентаDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDИнгредиентаDataGridViewTextBoxColumn.Name = "iDИнгредиентаDataGridViewTextBoxColumn";
-            this.iDИнгредиентаDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDИнгредиентаDataGridViewTextBoxColumn.Width = 125;
             // 
             // названиеDataGridViewTextBoxColumn
             // 
@@ -197,6 +166,14 @@
             this.калорийностьDataGridViewTextBoxColumn.Name = "калорийностьDataGridViewTextBoxColumn";
             this.калорийностьDataGridViewTextBoxColumn.Width = 125;
             // 
+            // tovarBindingSource
+            // 
+            this.tovarBindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Tovar);
+            // 
+            // ingrbindingSource
+            // 
+            this.ingrbindingSource.DataSource = typeof(dodoisbase.Nhibernate.Entites.Ingr);
+            // 
             // TovarListF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -210,9 +187,9 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tovarBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ingrbindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,16 +200,14 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.BindingSource tovarBindingSource;
         private dodoDSTableAdapters.ТоварTableAdapter товарTableAdapter;
         private dodoDS dodoDS;
         private System.Windows.Forms.DataGridViewTextBoxColumn ingrDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource ingrbindingSource;
         private dodoDSTableAdapters.ИнгредиентыTableAdapter ингредиентыTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource tovarBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDТовараDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ингредиентDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDИнгредиентаDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn названиеDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ценаDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn категорияDataGridViewTextBoxColumn;

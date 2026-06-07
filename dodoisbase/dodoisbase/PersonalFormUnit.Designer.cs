@@ -44,10 +44,12 @@
             this.cb_Categor = new System.Windows.Forms.ComboBox();
             this.категорииBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.категорииTableAdapter = new dodoisbase.dodoDSTableAdapters.КатегорииTableAdapter();
+            this.сотрудникиBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.сотрудникиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.категорииBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.сотрудникиBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_save
@@ -63,7 +65,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource, "Стаж", true));
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource1, "Стаж", true));
             this.textBox4.Location = new System.Drawing.Point(148, 203);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(208, 22);
@@ -103,7 +105,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource, "ФИО", true));
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource1, "ФИО", true));
             this.textBox2.Location = new System.Drawing.Point(148, 86);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(208, 22);
@@ -120,12 +122,12 @@
             // 
             // textBox1
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource, "ID_Сотрудника", true));
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.сотрудникиBindingSource1, "ID_Сотрудника", true));
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(148, 34);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(208, 22);
+            this.textBox1.Size = new System.Drawing.Size(109, 22);
             this.textBox1.TabIndex = 27;
             // 
             // label1
@@ -143,15 +145,15 @@
             // 
             // cb_Categor
             // 
-            this.cb_Categor.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.сотрудникиBindingSource, "ID_Категория", true));
-            this.cb_Categor.DataSource = this.категорииBindingSource;
-            this.cb_Categor.DisplayMember = "Категория";
+            this.cb_Categor.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.сотрудникиBindingSource1, "ID_Категории", true));
+            this.cb_Categor.DataSource = this.сотрудникиBindingSource1;
+            this.cb_Categor.DisplayMember = "ID_Категории";
             this.cb_Categor.FormattingEnabled = true;
             this.cb_Categor.Location = new System.Drawing.Point(148, 142);
             this.cb_Categor.Name = "cb_Categor";
             this.cb_Categor.Size = new System.Drawing.Size(208, 24);
             this.cb_Categor.TabIndex = 39;
-            this.cb_Categor.ValueMember = "Код";
+            this.cb_Categor.ValueMember = "ID_Категории";
             // 
             // категорииBindingSource
             // 
@@ -161,6 +163,11 @@
             // категорииTableAdapter
             // 
             this.категорииTableAdapter.ClearBeforeFill = true;
+            // 
+            // сотрудникиBindingSource1
+            // 
+            this.сотрудникиBindingSource1.DataMember = "Сотрудники";
+            this.сотрудникиBindingSource1.DataSource = this.dodoDS;
             // 
             // PersonalFormUnit
             // 
@@ -183,6 +190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dodoDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.категорииBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.сотрудникиBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +213,6 @@
         private System.Windows.Forms.BindingSource сотрудникиBindingSource;
         private System.Windows.Forms.BindingSource категорииBindingSource;
         private System.Windows.Forms.BindingSource personalBindingSource;
+        private System.Windows.Forms.BindingSource сотрудникиBindingSource1;
     }
 }

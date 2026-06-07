@@ -16,6 +16,8 @@ namespace dodoisbase.Nhibernate.Entites
         public virtual string Адресс_доставки { get; set; }
 
         public virtual Personal Personal { get; set; }
-        public virtual IList<Personal> PersonalList { get; set; }
+        public virtual IList<Tovar> TovarList { get; set; }
+        // Связь через Доставку (one-to-many)
+        public virtual IList<Dostavka> Dostavkas { get; set; }
     }
 }

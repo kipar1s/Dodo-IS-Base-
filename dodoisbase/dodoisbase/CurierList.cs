@@ -37,47 +37,66 @@ namespace dodoisbase
         void UdateCurierGrid()
         {
             //Загрузка данных из таблицы курьеры в массив объекотов 
-            curiers = nhibernate_session.QueryOver<Curier>().List<Curier>();
+            curiers = nhibernate_session.QueryOver<Curier>()
+                .JoinQueryOver(c => c.Сотрудник)
+                .List<Curier>();
             this.curierBindingSource.DataSource = curiers;
         }
 
         private void tsb_Create_Click(object sender, EventArgs e)
         {
-            Curier curier = new Curier();
-            CurierFormUnit curier_form_unit = new CurierFormUnit();
-            curier_form_unit.SetDataSourse(curier);
-            if (curier_form_unit.ShowDialog() == DialogResult.OK)
-            {
-                nhibernate_session.Save(curier);
-                nhibernate_session.Flush();
+            CurierForm form = new CurierForm(nhibernate_session);
+            form.CreateItem(); // Без параметров — выбор сотрудника внутри
 
-                //Обнов данных
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                nhibernate_session.Clear();
                 UdateCurierGrid();
             }
         }
 
         private void tsb_Edit_Click(object sender, EventArgs e)
         {
+            if (this.curierBindingSource.Current == null) return;
+
             var curier = (Curier)this.curierBindingSource.Current;
 
-            // Инициализируем ленивые загрузки перед клонированием
-            NHibernateUtil.Initialize(curier.ID_Сотрудника);
+            CurierForm form = new CurierForm(nhibernate_session);
+            form.LoadItem(curier.ID_Курьера);
 
-            Curier curierClone = MyUtiletes.Clone<Curier>(curier);
-            CurierFormUnit curier_form_unit = new CurierFormUnit();
-            curier_form_unit.SetDataSourse(curier);
-            if (curier_form_unit.ShowDialog() == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                nhibernate_session.Merge(curier);
-                nhibernate_session.Flush();
-
-                //Обнов данных
+                nhibernate_session.Clear();
                 UdateCurierGrid();
             }
-        }       
+        }
+
         private void tsb_Delite_Click(object sender, EventArgs e)
         {
+            if (this.curierBindingSource.Current == null) return;
 
+            var curier = (Curier)this.curierBindingSource.Current;
+
+            var result = MessageBox.Show(
+                $"Удалить курьера {curier.ФИО ?? "без имени"}?",
+                "Подтверждение удаления",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var toDelete = nhibernate_session.Get<Curier>(curier.ID_Курьера);
+                nhibernate_session.Delete(toDelete);
+                nhibernate_session.Flush();
+                nhibernate_session.Clear();
+                UdateCurierGrid();
+            }
+        }
+
+        private void CurierList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Закрываем сессию при закрытии формы
+            nhibernate_session?.Close();
         }
     }
 }

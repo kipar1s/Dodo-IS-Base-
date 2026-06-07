@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+				  assembly="dodoisbase"
+				  namespace="dodoisbase.Nhibernate.Entites">
+
+	<!-- Базовый класс: таблица Сотрудники -->
+	<class name="Employee" table="[Сотрудники]">
+		<id name="ID_Сотрудника" column="[ID_Сотрудника]">
+			<generator class="native" />
+		</id>
+		<!-- Дискриминатор для различения подклассов -->
+		<discriminator column="[Тип_сотрудника]" type="String" 
+					   length="1" insert="true" force="true"/>		
+		<property name="ФИО" column="[ФИО]"/>
+		<property name="Стаж" column="[Стаж]"/>
+		<!-- Выпадающий список: Категория (many-to-one) -->
+		<many-to-one name="Категория" column="[ID_Категории]"
+                     class="Categori" cascade="merge" not-null="false"/>
+		<!-- Подкласс: обычный сотрудник -->
+		<subclass name="Personal" discriminator-value="P">
+			<bag name="Dostavkas" inverse="true">
+				<key column="[ID_Сотрудника]"/>
+				<one-to-many class="Dostavka"/>
+			</bag>
+			<bag name="Orders" inverse="true">
+				<key column="[ID_Сотрудника]"/>
+				<one-to-many class="Oder"/>
+			</bag>
+		</subclass>
+		<!-- Подкласс: оцениваемый сотрудник -->
+		<subclass name="Evaluation" discriminator-value="E">
+			<property name="Пиццерия" column="[Пиццерия]"/>
+			<property name="РейтингКлиентаНаДоставку" column="[Рейтинг_клиента]"/>
+			<property name="КолВоОценок" column="[Кол_во_оценок]"/>
+			<property name="КолВоЗаказов" column="[Кол_во_заказов]"/>
+			<property name="ДоляЗаказовСОценкой" column="[Доля_заказов_с_оценкой]"/>
+		</subclass>
+	</class>
+</hibernate-mapping>

@@ -38,14 +38,14 @@
             this.dodoDSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dodoDS = new dodoisbase.dodoDS();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.iDСотрудникаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.фИОDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.стажDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDКатегорияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.категорииBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.сотрудникиTableAdapter = new dodoisbase.dodoDSTableAdapters.СотрудникиTableAdapter();
             this.категорииTableAdapter = new dodoisbase.dodoDSTableAdapters.КатегорииTableAdapter();
             this.курьерTableAdapter = new dodoisbase.dodoDSTableAdapters.КурьерTableAdapter();
+            this.iDСотрудникаDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Категории = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.фИОDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.стажDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.сотрудникиBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dodoDSBindingSource)).BeginInit();
@@ -63,7 +63,7 @@
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -72,7 +72,7 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(68, 28);
+            this.toolStripButton1.Size = new System.Drawing.Size(68, 24);
             this.toolStripButton1.Text = "Создать";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -82,7 +82,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(82, 28);
+            this.toolStripButton2.Size = new System.Drawing.Size(82, 24);
             this.toolStripButton2.Text = "Изменить";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -92,7 +92,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(69, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(69, 24);
             this.toolStripButton3.Text = "Удалить";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -117,54 +117,17 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDСотрудникаDataGridViewTextBoxColumn,
+            this.ID_Категории,
             this.фИОDataGridViewTextBoxColumn,
-            this.стажDataGridViewTextBoxColumn,
-            this.iDКатегорияDataGridViewTextBoxColumn});
+            this.стажDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.сотрудникиBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 31);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 27);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 419);
+            this.dataGridView1.Size = new System.Drawing.Size(800, 423);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // iDСотрудникаDataGridViewTextBoxColumn
-            // 
-            this.iDСотрудникаDataGridViewTextBoxColumn.DataPropertyName = "ID_Сотрудника";
-            this.iDСотрудникаDataGridViewTextBoxColumn.HeaderText = "ID_Сотрудника";
-            this.iDСотрудникаDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDСотрудникаDataGridViewTextBoxColumn.Name = "iDСотрудникаDataGridViewTextBoxColumn";
-            this.iDСотрудникаDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // фИОDataGridViewTextBoxColumn
-            // 
-            this.фИОDataGridViewTextBoxColumn.DataPropertyName = "ФИО";
-            this.фИОDataGridViewTextBoxColumn.HeaderText = "ФИО";
-            this.фИОDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.фИОDataGridViewTextBoxColumn.Name = "фИОDataGridViewTextBoxColumn";
-            this.фИОDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // стажDataGridViewTextBoxColumn
-            // 
-            this.стажDataGridViewTextBoxColumn.DataPropertyName = "Стаж";
-            this.стажDataGridViewTextBoxColumn.HeaderText = "Стаж";
-            this.стажDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.стажDataGridViewTextBoxColumn.Name = "стажDataGridViewTextBoxColumn";
-            this.стажDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // iDКатегорияDataGridViewTextBoxColumn
-            // 
-            this.iDКатегорияDataGridViewTextBoxColumn.DataPropertyName = "ID_Категория";
-            this.iDКатегорияDataGridViewTextBoxColumn.DataSource = this.категорииBindingSource2;
-            this.iDКатегорияDataGridViewTextBoxColumn.DisplayMember = "Категория";
-            this.iDКатегорияDataGridViewTextBoxColumn.HeaderText = "ID_Категория";
-            this.iDКатегорияDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDКатегорияDataGridViewTextBoxColumn.Name = "iDКатегорияDataGridViewTextBoxColumn";
-            this.iDКатегорияDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.iDКатегорияDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.iDКатегорияDataGridViewTextBoxColumn.ValueMember = "Код";
-            this.iDКатегорияDataGridViewTextBoxColumn.Width = 125;
             // 
             // категорииBindingSource2
             // 
@@ -182,6 +145,38 @@
             // курьерTableAdapter
             // 
             this.курьерTableAdapter.ClearBeforeFill = true;
+            // 
+            // iDСотрудникаDataGridViewTextBoxColumn
+            // 
+            this.iDСотрудникаDataGridViewTextBoxColumn.DataPropertyName = "ID_Сотрудника";
+            this.iDСотрудникаDataGridViewTextBoxColumn.HeaderText = "ID_Сотрудника";
+            this.iDСотрудникаDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.iDСотрудникаDataGridViewTextBoxColumn.Name = "iDСотрудникаDataGridViewTextBoxColumn";
+            this.iDСотрудникаDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // ID_Категории
+            // 
+            this.ID_Категории.DataPropertyName = "ID_Категории";
+            this.ID_Категории.HeaderText = "ID_Категории";
+            this.ID_Категории.MinimumWidth = 6;
+            this.ID_Категории.Name = "ID_Категории";
+            this.ID_Категории.Width = 125;
+            // 
+            // фИОDataGridViewTextBoxColumn
+            // 
+            this.фИОDataGridViewTextBoxColumn.DataPropertyName = "ФИО";
+            this.фИОDataGridViewTextBoxColumn.HeaderText = "ФИО";
+            this.фИОDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.фИОDataGridViewTextBoxColumn.Name = "фИОDataGridViewTextBoxColumn";
+            this.фИОDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // стажDataGridViewTextBoxColumn
+            // 
+            this.стажDataGridViewTextBoxColumn.DataPropertyName = "Стаж";
+            this.стажDataGridViewTextBoxColumn.HeaderText = "Стаж";
+            this.стажDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.стажDataGridViewTextBoxColumn.Name = "стажDataGridViewTextBoxColumn";
+            this.стажDataGridViewTextBoxColumn.Width = 125;
             // 
             // PersonalListForm
             // 
@@ -220,10 +215,11 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn категорияDataGridViewTextBoxColumn;
         private dodoDSTableAdapters.КурьерTableAdapter курьерTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDСотрудникаDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn фИОDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn стажDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn iDКатегорияDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource категорииBindingSource2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDСотрудникаDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Категории;
+        private System.Windows.Forms.DataGridViewTextBoxColumn фИОDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn стажDataGridViewTextBoxColumn;
     }
 }

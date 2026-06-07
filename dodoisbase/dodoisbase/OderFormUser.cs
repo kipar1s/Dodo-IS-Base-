@@ -21,7 +21,9 @@ namespace dodoisbase
         static State_OderFormUser state;
         public OderFormUser()
         {
-            InitializeComponent();
+            InitializeComponent();// Привязать BindingSource к DataSet и таблице
+            this.заказbindingSource.DataSource = this.dodoDS;
+            this.заказbindingSource.DataMember = "Заказ";
         }
 
         private void OderFormUser_Load(object sender, EventArgs e)

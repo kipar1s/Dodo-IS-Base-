@@ -60,17 +60,32 @@ namespace dodoisbase
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Ingr ingrs =MyUtiletes.Clone<Ingr>((Ingr)this.ингредиентыBindingSource.Current);
+            // Стало: передаём оригинальный объект
+            Ingr ingrs = (Ingr)this.ингредиентыBindingSource.Current;
+            
+            if (ingrs == null)
+            {
+                MessageBox.Show("Выберите ингредиент!");
+                return;
+            }
+
+            // Инициализируем коллекцию, если она ленивая
+            if (ingrs.Tovars != null)
+            {
+                NHibernateUtil.Initialize(ingrs.Tovars);
+            }
+
             IngrFormU ingrFormU = new IngrFormU();
             ingrFormU.SetDataSourse(ingrs);
-            if(ingrFormU.ShowDialog()== DialogResult.OK) 
+
+            if (ingrFormU.ShowDialog() == DialogResult.OK)
             {
+                // Merge обновляет объект в сессии
                 nhibernate_session.Merge(ingrs);
                 nhibernate_session.Flush();
-
                 UdateIngrGrid();
             }
-            
+
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -86,6 +101,10 @@ namespace dodoisbase
 
             UdateIngrGrid();
 
+        }
+        private void IngrListF_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            nhibernate_session?.Close();
         }
     }
 }
